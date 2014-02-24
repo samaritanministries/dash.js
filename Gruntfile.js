@@ -6,7 +6,7 @@ module.exports = function (grunt) {
     uglify: {
       my_target: {
         files: {
-          'smchcn_oauth.min.js': ['scripts/bower_components/jquery/jquery.js',
+          'samaritan-js.min.js': ['scripts/bower_components/jquery/jquery.js',
                                   'scripts/bower_components/uuid-js/lib/uuid.js',
                                   'scripts/bower_components/cookies-js/src/cookies.js',
                                   'scripts/smchcn_oauth/namespace.js',
