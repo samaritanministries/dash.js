@@ -1,6 +1,6 @@
 {
   "name": "samaritan-js",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "dependencies": {
     "cookies-js": "~0.3.1",
     "uuid-js": "~0.7.4",
@@ -9,8 +9,8 @@
   "authors": [
     "smi <smi@8thlight.com>"
   ],
-  "description": "Encapsulate ability to create OAuth urls and request them to access Samaritan services",
-  "main": "dist/smchcn_oauth.min.js",
+  "description": "Use Samaritan OAuth abilities to build front-end applications",
+  "main": "dist/samaritan-js.min.js",
   "keywords": [
     "samaritan"
   ],
