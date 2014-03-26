@@ -1,10 +1,14 @@
 {
   "name": "samaritan-js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "cookies-js": "~0.3.1",
     "uuid-js": "~0.7.4",
-    "jquery": "~2.0.3"
+  },
+  "devDependencies": {
+    "jquery": "~2.0.3",
+    "sinonjs": "~1.9.0",
+    "jasmine-jquery": "1.7.0"
   },
   "authors": [
     "smi <smi@8thlight.com>"
