@@ -111,16 +111,17 @@
       expect(findModals()).not.toExist();
       return cleanup(autoRefresh);
     });
-    it('expires "isAutoRefresh" cookie and sets browser location to url after 2 seconds', function() {
+    it('expires "isAutoRefresh" cookie and sets browser location to url after maxWaitForToken', function() {
       var autoRefresh, url;
 
       spyOn(Browser.Location, 'change');
       url = 'someurl';
-      autoRefresh = registerCurrentApp(profileAppId, url, 'state', 5);
-      tick(5);
+      autoRefresh = registerCurrentApp(profileAppId, url, 'state', 20);
+      maxWaitInSeconds = autoRefresh.maxWaitForToken / 1000
+      tick(20);
       expect(findModals()).toExist();
       expect(Browser.Location.change).not.toHaveBeenCalled();
-      tick(2);
+      tick(maxWaitInSeconds);
       expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
       expect(Browser.Location.change).toHaveBeenCalledWith(url);
       return cleanup(autoRefresh);

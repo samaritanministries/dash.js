@@ -16,6 +16,7 @@ namespace('SamaritanJs.OAuth');
     AutoRefresh.prototype.modalDataId = 'refresh-modal';
 
     AutoRefresh.prototype.checkForTokenInterval = 200;
+    AutoRefresh.prototype.maxWaitForToken = 6000;
 
     AutoRefresh.prototype.register = function() {
       var timeInSeconds, timeoutInMilliseconds,
@@ -43,7 +44,7 @@ namespace('SamaritanJs.OAuth');
       })).storeState();
       this.modal = this.createModal(this.url);
       this.modal.render();
-      this.refreshPageTimeoutId = Browser.setTimeout(this.refreshLocation, 2000);
+      this.refreshPageTimeoutId = Browser.setTimeout(this.refreshLocation, this.maxWaitForToken);
       return this.intervalId = Browser.setInterval((function() {
         return _this.closeModal();
       }), this.checkForTokenInterval);
