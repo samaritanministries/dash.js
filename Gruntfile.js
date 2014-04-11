@@ -44,7 +44,7 @@ module.exports = function (grunt) {
         'js/scripts/namespace.js',
         'js/scripts/browser.js',
         'js/scripts/bower_components/jquery/jquery.js',
-        'js/scripts/bower_components/uuid-js/uuid.js',
+        'js/scripts/bower_components/uuid-js/lib/uuid.js',
         'js/scripts/bower_components/cookies-js/src/cookies.js',
         'js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
         'js/scripts/samaritan_js/**/*.js',
