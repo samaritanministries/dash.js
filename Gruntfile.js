@@ -12,6 +12,7 @@ module.exports = function (grunt) {
           'dist/samaritan-js.min.js': [
             '.tmp/js/scripts/bower_components/uuid-js/lib/uuid.js',
             '.tmp/js/scripts/bower_components/cookies-js/src/cookies.js',
+            '.tmp/js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
             '.tmp/js/scripts/namespace.js',
             '.tmp/js/scripts/browser.js',
             '.tmp/js/scripts/endpoints.js',
@@ -45,6 +46,7 @@ module.exports = function (grunt) {
         'js/scripts/bower_components/jquery/jquery.js',
         'js/scripts/bower_components/uuid-js/uuid.js',
         'js/scripts/bower_components/cookies-js/src/cookies.js',
+        'js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
         'js/scripts/samaritan_js/**/*.js',
       ],
       dest: '.tmp/'
