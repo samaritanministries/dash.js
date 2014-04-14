@@ -7,7 +7,6 @@
     "iframe-resizer": "~2.2.3"
   },
   "devDependencies": {
-    "sinonjs": "~1.9.0",
     "jasmine-jquery": "1.7.0"
   },
   "authors": [

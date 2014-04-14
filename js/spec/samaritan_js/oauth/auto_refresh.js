@@ -1,22 +1,19 @@
 (function() {
   describe('Token.AutoRefresh', function() {
-    var cleanup, createAutoRefresh, findModals, profileAppId, registerApp, registerCurrentApp, setCurrentApp, tick;
+    var cleanup, createAutoRefresh, findModals, profileAppId, registerApp, registerCurrentApp, tick;
 
     profileAppId = 'profile';
-    setCurrentApp = function(appId) {
-      return spyOn(Browser.Location, 'hash').andReturn("#" + appId);
+    createAutoRefresh = function(appId, url, state, shouldShowCallback) {
+      return new SamaritanJs.OAuth.AutoRefresh(appId, url, state, shouldShowCallback);
     };
-    createAutoRefresh = function(appId, url, state) {
-      return new SamaritanJs.OAuth.AutoRefresh(appId, url, state);
-    };
-    registerApp = function(appId, url, state, timeout, token) {
+    registerApp = function(appId, url, state, timeout, token, shouldShowCallback) {
       var a;
 
       if (token == null) {
         token = 'sfadghjfd32456trfgd';
       }
       SamaritanJs.OAuth.TokenAccessor.set(appId, token, timeout);
-      a = createAutoRefresh(appId, url, state);
+      a = createAutoRefresh(appId, url, state, shouldShowCallback);
       a.register();
       return a;
     };
@@ -24,7 +21,6 @@
       if (token == null) {
         token = 'sfadghjfd32456trfgd';
       }
-      setCurrentApp(appId);
       return registerApp(appId, url, state, timeout, token);
     };
     findModals = function() {
@@ -136,11 +132,11 @@
       expect(Browser.setTimeout.calls.length).toEqual(1);
       return cleanup(autoRefresh);
     });
-    return it('if the modal being opened is not from the current app, the modal is not opened', function() {
+    return it('can take a custom callback to determine if it should show', function() {
       var autoRefresh;
 
-      setCurrentApp('not here');
-      autoRefresh = registerApp(profileAppId, 'url', 'state', 1);
+      var callback = function() {return false;}
+      autoRefresh = registerApp(profileAppId, 'url', 'state', 1, 'token', callback);
       tick(1);
       expect(findModals()).not.toExist();
       return cleanup(autoRefresh);

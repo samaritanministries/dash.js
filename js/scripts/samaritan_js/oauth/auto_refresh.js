@@ -6,10 +6,11 @@ namespace('SamaritanJs.OAuth');
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   SamaritanJs.OAuth.AutoRefresh = (function() {
-    function AutoRefresh(appId, url, state) {
+    function AutoRefresh(appId, url, state, shouldShowCallback) {
       this.appId = appId;
       this.url = url;
       this.state = state;
+      this.shouldShowCallback = shouldShowCallback;
       this.refreshLocation = __bind(this.refreshLocation, this);
     }
 
@@ -75,12 +76,11 @@ namespace('SamaritanJs.OAuth');
     };
 
     AutoRefresh.prototype.shouldShowModal = function() {
-      return this.appId === this.currentAppId();
-    };
-
-    AutoRefresh.prototype.currentAppId = function() {
-      var _ref;
-      return (_ref = Browser.Location.hash().match(/#(.*)/)) != null ? _ref[1] : void 0;
+      if (this.shouldShowCallback != undefined) {
+        return this.shouldShowCallback();
+      } else {
+        return true;
+      }
     };
 
     AutoRefresh.expireFlag = function() {
