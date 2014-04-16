@@ -1,12 +1,13 @@
 {
   "name": "samaritan-js",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "dependencies": {
     "cookies-js": "~0.3.1",
     "uuid-js": "~0.7.4",
     "iframe-resizer": "~2.2.3"
   },
   "devDependencies": {
+    "jquery": "2.1.0",
     "jasmine-jquery": "1.7.0"
   },
   "authors": [

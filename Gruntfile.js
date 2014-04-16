@@ -15,7 +15,6 @@ module.exports = function (grunt) {
             '.tmp/js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
             '.tmp/js/scripts/namespace.js',
             '.tmp/js/scripts/browser.js',
-            '.tmp/js/scripts/endpoints.js',
             '.tmp/js/scripts/samaritan_js/oauth/cookie.js',
             '.tmp/js/scripts/samaritan_js/oauth/params.js',
             '.tmp/js/scripts/samaritan_js/oauth/url_generator.js',
@@ -30,14 +29,6 @@ module.exports = function (grunt) {
       }
     },
 
-  sass: {
-    dist: {
-      files: {
-        'dist/framework.css' : 'css/framework.css/sass/framework.scss'
-      }
-    }
-  },
-
   copy: {
     scripts: {
       src: [
@@ -50,28 +41,6 @@ module.exports = function (grunt) {
         'js/scripts/samaritan_js/**/*.js',
       ],
       dest: '.tmp/'
-    },
-    prodEndpoints: {
-      files: [{
-        expand: true,
-        rename: function(dest, src) {
-          return dest + 'endpoints.js';
-        },
-        cwd: 'js/scripts/config/',
-        src: ['prod_endpoints.js'],
-        dest: '.tmp/js/scripts/'
-      }]
-    },
-    sandboxEndpoints: {
-      files: [{
-        expand: true,
-        rename: function(dest, src) {
-          return dest + 'endpoints.js';
-        },
-        cwd: 'js/scripts/config/',
-        src: ['sandbox_endpoints.js'],
-        dest: '.tmp/js/scripts/'
-      }]
     }
   },
 
@@ -84,16 +53,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build:js', [
                      'clean',
                      'copy:scripts',
-                     'copy:prodEndpoints',
                      'uglify'
   ]);
-
-  grunt.registerTask('build:sandboxJs', [
-                     'clean',
-                     'copy:scripts',
-                     'copy:sandboxEndpoints',
-                     'uglify'
-  ]);
-  grunt.registerTask('build:sass', ['sass']);
-  grunt.registerTask('build', ['build:js', 'build:sass']);
+  grunt.registerTask('build', ['build:js']);
 };
