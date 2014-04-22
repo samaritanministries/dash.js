@@ -3,25 +3,28 @@
     var cleanup, createAutoRefresh, findModals, profileAppId, registerApp, registerCurrentApp, tick;
 
     profileAppId = 'profile';
-    createAutoRefresh = function(appId, url, state, shouldShowCallback) {
-      return new SamaritanJs.OAuth.AutoRefresh(appId, url, state, shouldShowCallback);
+    createAutoRefresh = function(appId, urlGenerator, shouldShowCallback) {
+      return new SamaritanJs.OAuth.AutoRefresh(appId, urlGenerator, shouldShowCallback);
     };
-    registerApp = function(appId, url, state, timeout, token, shouldShowCallback) {
+    registerApp = function(appId, urlGenerator, timeout, token, shouldShowCallback) {
       var a;
 
       if (token == null) {
         token = 'sfadghjfd32456trfgd';
       }
       SamaritanJs.OAuth.TokenAccessor.set(appId, token, timeout);
-      a = createAutoRefresh(appId, url, state, shouldShowCallback);
+      a = createAutoRefresh(appId, urlGenerator, shouldShowCallback);
       a.register();
       return a;
     };
-    registerCurrentApp = function(appId, url, state, timeout, token) {
+    registerCurrentApp = function(appId, urlGenerator, timeout, token) {
       if (token == null) {
         token = 'sfadghjfd32456trfgd';
       }
-      return registerApp(appId, url, state, timeout, token);
+      return registerApp(appId, urlGenerator, timeout, token);
+    };
+    var createMockUrlGenerator = function(url, state) {
+      return {generate: function(){return {url: url || '/redirect', state: state || 'state'}}};
     };
     findModals = function() {
       return $("[data-id=" + (new SamaritanJs.OAuth.AutoRefresh).modalDataId + "]");
@@ -41,14 +44,14 @@
 
       spyOn(Browser, 'setTimeout');
       spyOn(Date, 'now').andReturn(1396443193877);
-      autoRefresh = registerApp(profileAppId, 'url', 'state', '123');
+      autoRefresh = registerApp(profileAppId, createMockUrlGenerator(), '123');
       expect(Browser.setTimeout.mostRecentCall.args[1]).toEqual(123 * 1000);
       return cleanup(autoRefresh);
     });
     it('expires the token', function() {
       var autoRefresh;
 
-      autoRefresh = registerCurrentApp(profileAppId, 'url', 'state', 1);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
       tick(1);
       expect(SamaritanJs.OAuth.TokenAccessor.get(profileAppId)).toBeUndefined();
       return cleanup(autoRefresh);
@@ -56,17 +59,18 @@
     it('sets a cookie to signify future request will be an autorefresh request', function() {
       var autoRefresh;
 
-      autoRefresh = registerCurrentApp(profileAppId, 'url', 'state', 1);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
       expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
       tick(1);
       expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeTruthy();
       return cleanup(autoRefresh);
     });
     it('sets a new state', function() {
-      var autoRefresh, state;
+      var autoRefresh;
+      var state = 'the-state';
+      var urlGenerator = createMockUrlGenerator('', state);
 
-      state = 'testState';
-      autoRefresh = registerCurrentApp(profileAppId, 'url', state, 1);
+      autoRefresh = registerCurrentApp(profileAppId, urlGenerator, 1);
       tick(1);
       expect((new SamaritanJs.OAuth.TokenValidator(state)).isValidState()).toBeTruthy();
       return cleanup(autoRefresh);
@@ -80,7 +84,7 @@
 
       spyOn(SamaritanJs.OAuth, 'TokenRefreshIframe').andReturn(fakeIframe);
       url = 'test/url';
-      autoRefresh = registerCurrentApp(profileAppId, url, 'state', 1);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(url), 1);
       tick(1);
       openedUrl = SamaritanJs.OAuth.TokenRefreshIframe.mostRecentCall.args[0];
       expect(openedUrl).toEqual(url);
@@ -89,7 +93,7 @@
     it('is not visible', function() {
       var autoRefresh, modal;
 
-      autoRefresh = registerCurrentApp(profileAppId, 'url', 'state', 5);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 5);
       tick(5);
       modal = findModals();
       tick(1);
@@ -99,7 +103,7 @@
     it('removes the opened modal when the token is set', function() {
       var autoRefresh;
 
-      autoRefresh = registerCurrentApp(profileAppId, 'url', 'state', 1);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
       tick(1);
       expect(findModals()).toExist();
       SamaritanJs.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
@@ -112,7 +116,7 @@
 
       spyOn(Browser.Location, 'change');
       url = 'someurl';
-      autoRefresh = registerCurrentApp(profileAppId, url, 'state', 20);
+      autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(url), 20);
       maxWaitInSeconds = autoRefresh.maxWaitForToken / 1000
       tick(20);
       expect(findModals()).toExist();
@@ -126,7 +130,7 @@
       var autoRefresh;
 
       spyOn(Browser, 'setTimeout').andCallThrough();
-      autoRefresh = createAutoRefresh(profileAppId, 'url', 'state', 1);
+      autoRefresh = createAutoRefresh(profileAppId, createMockUrlGenerator(), 1);
       SamaritanJs.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
       autoRefresh.closeModal();
       expect(Browser.setTimeout.calls.length).toEqual(1);
@@ -136,7 +140,7 @@
       var autoRefresh;
 
       var callback = function() {return false;}
-      autoRefresh = registerApp(profileAppId, 'url', 'state', 1, 'token', callback);
+      autoRefresh = registerApp(profileAppId, createMockUrlGenerator(), 1, 'token', callback);
       tick(1);
       expect(findModals()).not.toExist();
       return cleanup(autoRefresh);

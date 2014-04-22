@@ -7,17 +7,18 @@ SamaritanJs.OAuth.AccessRequester = function(urlGenerator) {
   var FIVE_MINUTES_IN_SECONDS = 300;
   this.urlGenerator = urlGenerator;
 
-  this.storeState = function () {
-    Cookie.set(Cookie.names.state, this.urlGenerator.state, {expires: FIVE_MINUTES_IN_SECONDS});
-  };
-
   this.requestAccess = function() {
-    this.storeState();
-    this.sendRequest();
+    var urlAndState = this.urlGenerator.generate()
+    this.storeState(urlAndState.state);
+    this.sendRequest(urlAndState.url);
   };
 
-  this.sendRequest = function() {
-    Browser.Location.change(this.urlGenerator.generate());
+  this.storeState = function (state) {
+    Cookie.set(Cookie.names.state, state, {expires: FIVE_MINUTES_IN_SECONDS});
+  };
+
+  this.sendRequest = function(url) {
+    Browser.Location.change(url);
   };
 };
 

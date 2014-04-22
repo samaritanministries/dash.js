@@ -3,47 +3,31 @@ describe("Making a call for oauth access", function() {
   var Location = Browser.Location;
   var createAccessRequester = function(urlGenerator) {
     return new SamaritanJs.OAuth.AccessRequester(urlGenerator);
-  }
+  };
+  var createMockUrlGenerator = function() {
+    return {generate: function(){return {url: '/redirect', state: 'state'}}};
+  };
 
   beforeEach(function () {
     Cookie.expire(Cookie.names.state);
+    spyOn(Location, 'change');
   });
 
-  it("stores the state the generator owns", function() {
-    var uuid = '1hfysd7h3365jws98';
-    var mockUrlGenerator = {state: uuid};
-    var requester = createAccessRequester(mockUrlGenerator);
+  it("stores the generated state in a cookie for 5 minutes", function() {
+    spyOn(Cookie, 'set');
+    var urlGenerator = createMockUrlGenerator();
 
-    requester.storeState();
+    createAccessRequester(urlGenerator).requestAccess();
 
-    expect(Cookie.get(Cookie.names.state)).toBe(uuid);
+    expect(Cookie.set).toHaveBeenCalledWith(Cookie.names.state, urlGenerator.generate().state, {expires: 300});
   });
 
-  it("sets the expiration of the cookie to 5 minutes", function() {
-    var uuid = '1hfysd7h3365jws98';
-    var mockUrlGenerator = {state: uuid};
-    var requester = createAccessRequester(mockUrlGenerator);
-    var cookieSpy = spyOn(Cookie, 'set');
+  it("makes a request with a built url", function() {
+    var urlGenerator = createMockUrlGenerator();
 
-    requester.storeState();
+    createAccessRequester(urlGenerator).requestAccess();
 
-    expect(cookieSpy).toHaveBeenCalledWith(Cookie.names.state, uuid, {expires: 300});
-  });
-
-  it("requestAccess makes a request with a built url", function() {
-    var uuid = '1hfysd7h3365jws98';
-    var mockUrlGenerator = {
-      state: uuid,
-      generate: function(){return '/redirect'}
-    };
-
-    var requester = createAccessRequester(mockUrlGenerator);
-
-    var requestSpy = spyOn(Location, 'change');
-
-    requester.requestAccess();
-
-    expect(Cookie.get(Cookie.names.state)).toBe(uuid);
-    expect(requestSpy).toHaveBeenCalledWith('/redirect');
+    expect(Location.change).toHaveBeenCalledWith(urlGenerator.generate().url);
+    expect(Cookie.get(Cookie.names.state)).toBe(urlGenerator.generate().state);
   });
 });

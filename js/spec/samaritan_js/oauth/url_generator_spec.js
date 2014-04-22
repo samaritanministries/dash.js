@@ -36,24 +36,37 @@ describe("Generating an OAuth Url", function() {
     expect(urlGenerator.scopes).toEqual(['test-scope']);
   });
 
-  it("has a state to protect from cross-site attacks", function() {
-    var urlGenerator = createUrlGenerator({});
-
-    expect(urlGenerator.state).not.toBeUndefined();
-    expect(urlGenerator.state.length).toBe(36);
-  });
-
-  it("creates a query url with the data", function() {
+  it("creates a query url with the data and a state to protect from cross-site attacks", function() {
     var scopes = ['identity', 'profile', 'needs', 'membership'];
-    var encodedScopes = 'identity profile needs membership'
-    var urlGenerator = createUrlGenerator({baseUrl: 'https://example.com', redirectUrl: 'https://example.com/1', scopes: scopes, clientId: '123', responseType: 'token', context: "12344"});
+    var encodedScopes = scopes.join(' ');
+    var urlGenerator = createUrlGenerator(
+      {
+        baseUrl: 'https://example.com',
+        redirectUrl: 'https://example.com/1',
+        scopes: scopes,
+        clientId: '123',
+        responseType: 'token',
+        context: "12344"
+      }
+    );
+    var urlAndState = urlGenerator.generate();
 
     var encodedRedirectUrl = encodeURI(urlGenerator.redirectUrl);
-    var params = jQuery.param({scope: encodedScopes, state: urlGenerator.state, redirect_uri: encodedRedirectUrl, client_id: urlGenerator.clientId, response_type: urlGenerator.responseType, context: "12344"});
+    var params = jQuery.param(
+      {
+        scope: encodedScopes,
+        state: urlAndState.state,
+        redirect_uri: encodedRedirectUrl,
+        client_id: urlGenerator.clientId,
+        response_type: urlGenerator.responseType,
+        context: "12344"
+      }
+    );
 
     var generatedUrl = urlGenerator.baseUrl + "?" + params;
 
-    expect(urlGenerator.generate()).toBe(generatedUrl);
+    expect(urlAndState.url).toBe(generatedUrl);
+    expect(urlAndState.state.length).toBe(36);
   });
 
 });

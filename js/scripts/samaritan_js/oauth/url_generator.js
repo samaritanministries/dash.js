@@ -6,23 +6,23 @@ namespace('SamaritanJs.OAuth');
 SamaritanJs.OAuth.UrlGenerator = function(urlOptions) {
   this.baseUrl      = urlOptions.baseUrl;
   this.clientId     = urlOptions.clientId || "smi_platform";
-  this.context      = urlOptions.context
+  this.context      = urlOptions.context;
   this.redirectUrl  = urlOptions.redirectUrl;
   this.responseType = urlOptions.responseType;
   this.scopes       = urlOptions.scopes || [ "identity", "needs", 'profile', "membership", "enroll"];
-  this.state        = UUID.create().hex;
 
   this.generate = function() {
+    var state = UUID.create().hex;
     var params = $.param({
       scope:         this.scopes.join(" "),
-      state:         this.state,
+      state:         state,
       redirect_uri:  this.redirectUrl,
       client_id:     this.clientId,
       response_type: this.responseType,
       context:       this.context
     });
 
-    return this.baseUrl + "?" + params;
+    return {url: this.baseUrl + "?" + params, state: state};
   };
 };
 

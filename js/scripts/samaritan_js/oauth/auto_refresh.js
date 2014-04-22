@@ -6,10 +6,9 @@ namespace('SamaritanJs.OAuth');
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   SamaritanJs.OAuth.AutoRefresh = (function() {
-    function AutoRefresh(appId, url, state, shouldShowCallback) {
+    function AutoRefresh(appId, urlGenerator, shouldShowCallback) {
       this.appId = appId;
-      this.url = url;
-      this.state = state;
+      this.urlGenerator = urlGenerator;
       this.shouldShowCallback = shouldShowCallback;
       this.refreshLocation = __bind(this.refreshLocation, this);
     }
@@ -40,12 +39,11 @@ namespace('SamaritanJs.OAuth');
       var _this = this;
       SamaritanJs.OAuth.TokenAccessor.expire(this.appId);
       SamaritanJs.OAuth.Cookie.set('isAutoRefresh', 'true', 10);
-      (new SamaritanJs.OAuth.AccessRequester({
-        state: this.state
-      })).storeState();
-      this.modal = this.createModal(this.url);
+      var urlAndState = this.urlGenerator.generate();
+      (new SamaritanJs.OAuth.AccessRequester()).storeState(urlAndState.state);
+      this.modal = this.createModal(urlAndState.url);
       this.modal.render();
-      this.refreshPageTimeoutId = Browser.setTimeout(this.refreshLocation, this.maxWaitForToken);
+      this.refreshPageTimeoutId = Browser.setTimeout(function(){_this.refreshLocation(urlAndState.url)}, this.maxWaitForToken);
       return this.intervalId = Browser.setInterval((function() {
         return _this.closeModal();
       }), this.checkForTokenInterval);
@@ -55,9 +53,9 @@ namespace('SamaritanJs.OAuth');
       return new SamaritanJs.OAuth.TokenRefreshIframe(url);
     };
 
-    AutoRefresh.prototype.refreshLocation = function() {
+    AutoRefresh.prototype.refreshLocation = function(url) {
       SamaritanJs.OAuth.AutoRefresh.expireFlag();
-      return Browser.Location.change(this.url);
+      return Browser.Location.change(url);
     };
 
     AutoRefresh.prototype.closeModal = function() {

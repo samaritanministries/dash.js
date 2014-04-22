@@ -39,7 +39,7 @@ git add bower.json
 
 # commit
 git commit -m'Version '$VERSION''
-git tag 'v'$VERSION''
+git tag -f 'v'$VERSION''
 
 # print messages
 echo ''
