@@ -10,6 +10,10 @@ namespace('Browser');
 
     hash: function() {
       return window.location.hash;
+    },
+
+    reload: function() {
+      window.location.reload();
     }
   };
 
