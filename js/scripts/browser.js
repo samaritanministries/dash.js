@@ -28,5 +28,9 @@ namespace('Browser');
   Browser.setInterval = function(fn, timeInMilliseconds) {
     return window.setInterval(fn, timeInMilliseconds);
   };
+
+  Browser.scrollTo = function(x, y) {
+    window.scrollTo(x, y);
+  };
 }());
 
