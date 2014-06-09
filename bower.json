@@ -1,6 +1,6 @@
 {
   "name": "samaritan-js",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "dependencies": {
     "cookies-js": "~0.3.1",
     "uuid-js": "~0.7.4",
