@@ -37,8 +37,11 @@ namespace('Browser');
     }
   };
 
-  Browser.postMessage = function(message, origin) {
-    window.postMessage(message, origin);
+  Browser.postMessage = function(message, origin, win) {
+    if (win == null) {
+      win = window;
+    }
+    win.postMessage(message, origin);
   };
 
   Browser.scrollTo = function(x, y, url) {
