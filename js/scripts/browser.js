@@ -37,6 +37,10 @@ namespace('Browser');
     }
   };
 
+  Browser.postMessage = function(message, origin) {
+    window.postMessage(message, origin);
+  };
+
   Browser.scrollTo = function(x, y, url) {
     if (Browser.isInIframe()) {
       window.top.postMessage("scrollTo:" + y, url || '*');
