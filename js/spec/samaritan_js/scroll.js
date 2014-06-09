@@ -10,6 +10,6 @@ describe("Scroll", function() {
     var padding = 12;
     var url = 'http://example.com';
     SamaritanJs.Scroll.toElement('#the-div', url, padding);
-    expect(Browser.scrollTo).toHaveBeenCalledWith(0, url, topOffset - padding);
+    expect(Browser.scrollTo).toHaveBeenCalledWith(0, topOffset - padding, url);
   });
 });

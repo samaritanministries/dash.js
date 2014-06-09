@@ -12,7 +12,7 @@ namespace('SamaritanJs.Scroll');
     var offset = $(element).offset() || {top: 0};
     var topOffset = offset.top;
     var pixelsFromTop = topOffset - padding;
-    Browser.scrollTo(0, url, pixelsFromTop);
+    Browser.scrollTo(0, pixelsFromTop, url);
   };
 
 }());
