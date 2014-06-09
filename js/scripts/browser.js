@@ -29,8 +29,20 @@ namespace('Browser');
     return window.setInterval(fn, timeInMilliseconds);
   };
 
-  Browser.scrollTo = function(x, y) {
-    window.scrollTo(x, y);
+  Browser.isInIframe = function() {
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+      return true;
+    }
+  };
+
+  Browser.scrollTo = function(x, y, url) {
+    if (Browser.isInIframe()) {
+      window.top.postMessage("scrollTo:" + y, url || '*');
+    } else {
+      window.scrollTo(x, y);
+    }
   };
 }());
 

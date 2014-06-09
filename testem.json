@@ -7,6 +7,7 @@
     "js/scripts/bower_components/cookies-js/src/cookies.js",
     "js/scripts/namespace.js",
     "js/scripts/browser.js",
+    "js/scripts/samaritan_js/scroll.js",
     "js/scripts/samaritan_js/oauth/cookie.js",
     "js/scripts/samaritan_js/oauth/params.js",
     "js/scripts/samaritan_js/oauth/token_accessor.js",
