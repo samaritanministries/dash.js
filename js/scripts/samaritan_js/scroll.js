@@ -29,6 +29,35 @@ namespace('SamaritanJs.Scroll');
   };
 
   SamaritanJs.Scroll.registerInfiniteScroll = function(selector, callback, url) {
+    if (Browser.isInIframe()) {
+      return SamaritanJs.Scroll.registerInfiniteScrollIframe(selector, callback, url);
+    } else {
+      return SamaritanJs.Scroll.registerInfiniteScrollNonIframe(selector, callback, url);
+    };
+  };
+
+  SamaritanJs.Scroll.registerInfiniteScrollNonIframe = function(selector, callback, url) {
+    var removeWrapper = {};
+    var scrollHandler = function() {
+      var bottomOfWindow = $(window).height() + $(window).scrollTop();
+      var el = $(selector);
+      if (el.length > 0) {
+        var bottomOfEl = el.height() + el.offset().top;
+        if (bottomOfWindow >= bottomOfEl) {
+          callback();
+          removeWrapper.removeHandler();
+        };
+      };
+    };
+    $(window).on('scroll', scrollHandler);
+    var removeHandler = function() {
+      $(window).off('scroll', scrollHandler);
+    };
+    removeWrapper.removeHandler = removeHandler;
+    return removeHandler;
+  };
+
+  SamaritanJs.Scroll.registerInfiniteScrollIframe = function(selector, callback, url) {
     var removeWrapper = {};
 
     var shouldTriggerCallback = function(message) {
