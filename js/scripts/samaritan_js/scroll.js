@@ -28,4 +28,32 @@ namespace('SamaritanJs.Scroll');
     };
   };
 
+  SamaritanJs.Scroll.registerInfiniteScroll = function(selector, callback, url) {
+    var removeWrapper = {};
+
+    var shouldTriggerCallback = function(message) {
+      var el = $(selector);
+      var bottomOfWindow = message.windowHeight + message.windowScrollTop;
+      var bottomOfEl = el.height() + el.offset().top + message.iframeOffsetTop;
+      return bottomOfWindow >= bottomOfEl;
+    };
+
+    var messageHandler = function(event) {
+      if (event.origin == url) {
+        var message = JSON.parse(event.data);
+
+        if (message.type == 'infiniteScroll' && shouldTriggerCallback(message)) {
+          callback();
+          removeWrapper.removeHandler();
+        };
+      };
+    };
+    window.addEventListener('message', messageHandler, false);
+    var removeHandler = function() {
+      window.removeEventListener('message', messageHandler, false);
+    };
+    removeWrapper.removeHandler = removeHandler;
+    return removeHandler;
+  };
+
 }());
