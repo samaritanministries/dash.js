@@ -69,7 +69,12 @@ namespace('SamaritanJs.Scroll');
 
     var messageHandler = function(event) {
       if (event.origin == url) {
-        var message = JSON.parse(event.data);
+        var message;
+        try {
+          message = JSON.parse(event.data);
+        } catch (e) {
+          return;
+        }
 
         if (message.type == 'infiniteScroll' && shouldTriggerCallback(message)) {
           callback();

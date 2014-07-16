@@ -206,7 +206,7 @@ describe("Scroll", function() {
       runs(function(){
         expect(callback).not.toHaveBeenCalled();
       });
-      setTimeout(function(){ done = true; }, 20);
+      setTimeout(function(){ done = true; }, 30);
     });
 
     it("calls the callback function when scrolled to the bottom of the element", function() {
@@ -221,7 +221,7 @@ describe("Scroll", function() {
       runs(function(){
         expect(callback).toHaveBeenCalled();
       });
-      setTimeout(function(){ done = true; }, 20);
+      setTimeout(function(){ done = true; }, 30);
     });
 
     it("only calls the callback function once when scrolled to the bottom of the element", function() {
@@ -237,7 +237,7 @@ describe("Scroll", function() {
       runs(function(){
         expect(callback.calls.length).toEqual(1);
       });
-      setTimeout(function(){ done = true; }, 20);
+      setTimeout(function(){ done = true; }, 30);
     });
 
     it("returns a callback function to deregister the event listener", function() {
@@ -253,7 +253,7 @@ describe("Scroll", function() {
       runs(function(){
         expect(callback).not.toHaveBeenCalled();
       });
-      setTimeout(function(){ done = true; }, 20);
+      setTimeout(function(){ done = true; }, 30);
     });
   });
 });
