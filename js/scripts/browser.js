@@ -51,5 +51,23 @@ namespace('Browser');
       window.scrollTo(x, y);
     }
   };
+
+  Browser.notifyDoneLoading = function(appId, url) {
+    var message = {
+      type:    "notify",
+      message: "doneLoading",
+      app:     appId
+    };
+    window.top.postMessage(JSON.stringify(message), url);
+  };
+
+  Browser.notifyLoggedOut = function(appId, url) {
+    var message = {
+      type:    "notify",
+      message: "logout",
+      app:     appId
+    };
+    window.top.postMessage(JSON.stringify(message), url);
+  };
 }());
 

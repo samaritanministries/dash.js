@@ -15,6 +15,7 @@ module.exports = function (grunt) {
             '.tmp/js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
             '.tmp/js/scripts/namespace.js',
             '.tmp/js/scripts/browser.js',
+            '.tmp/js/scripts/samaritan_js/notify.js',
             '.tmp/js/scripts/samaritan_js/scroll.js',
             '.tmp/js/scripts/samaritan_js/oauth/cookie.js',
             '.tmp/js/scripts/samaritan_js/oauth/params.js',
