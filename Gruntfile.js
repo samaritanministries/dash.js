@@ -25,7 +25,8 @@ module.exports = function (grunt) {
             '.tmp/js/scripts/samaritan_js/oauth/token_validator.js',
             '.tmp/js/scripts/samaritan_js/oauth/access_requester.js',
             '.tmp/js/scripts/samaritan_js/oauth/auto_refresh.js',
-            '.tmp/js/scripts/samaritan_js/oauth/response.js'
+            '.tmp/js/scripts/samaritan_js/oauth/response.js',
+            '.tmp/js/scripts/samaritan_js/redirector.js'
           ]
         }
       }

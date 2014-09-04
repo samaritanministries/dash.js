@@ -14,7 +14,15 @@ namespace('Browser');
 
     reload: function() {
       window.location.reload();
+    },
+
+    changeHref: function(href) {
+      window.location.href = href;
     }
+  };
+
+  Browser.changeTitle = function(title) {
+    document.title = title;
   };
 
   Browser.open = function(url, options) {

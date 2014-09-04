@@ -18,6 +18,7 @@
     "js/scripts/samaritan_js/oauth/url_generator.js",
     "js/scripts/samaritan_js/oauth/access_requester.js",
     "js/scripts/samaritan_js/oauth/auto_refresh.js",
+    "js/scripts/samaritan_js/redirector.js",
     "js/spec/**/*.js"
   ]
 }
