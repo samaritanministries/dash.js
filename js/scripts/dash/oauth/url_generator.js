@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function(UUID, $) {
   'use strict';
 
-SamaritanJs.OAuth.UrlGenerator = function(urlOptions) {
+Dash.OAuth.UrlGenerator = function(urlOptions) {
   this.baseUrl      = urlOptions.baseUrl;
   this.clientId     = urlOptions.clientId || "smi_platform";
   this.context      = urlOptions.context;

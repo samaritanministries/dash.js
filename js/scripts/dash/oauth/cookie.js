@@ -1,13 +1,13 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function(Cookies) {
   'use strict';
 
-  SamaritanJs.OAuth.Cookie = {
+  Dash.OAuth.Cookie = {
     names: {
-      redirect: 'SamaritanJsOAuthRedirect',
-      state:    'SamaritanJsOAuthState',
-      token:    'SamaritanJsOAuthToken'
+      redirect: 'DashOAuthRedirect',
+      state:    'DashOAuthState',
+      token:    'DashOAuthToken'
     },
 
     set: function (key, value, options) {

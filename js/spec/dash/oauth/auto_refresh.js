@@ -1,10 +1,10 @@
 (function() {
-  describe('Token.AutoRefresh', function() {
+  describe('Dash.OAuth.AutoRefresh', function() {
     var cleanup, createAutoRefresh, findModals, profileAppId, registerApp, registerCurrentApp, tick;
 
     profileAppId = 'profile';
     createAutoRefresh = function(appId, urlGenerator, shouldShowCallback) {
-      return new SamaritanJs.OAuth.AutoRefresh(appId, urlGenerator, shouldShowCallback);
+      return new Dash.OAuth.AutoRefresh(appId, urlGenerator, shouldShowCallback);
     };
     registerApp = function(appId, urlGenerator, timeout, token, shouldShowCallback) {
       var a;
@@ -12,7 +12,7 @@
       if (token == null) {
         token = 'sfadghjfd32456trfgd';
       }
-      SamaritanJs.OAuth.TokenAccessor.set(appId, token, timeout);
+      Dash.OAuth.TokenAccessor.set(appId, token, timeout);
       a = createAutoRefresh(appId, urlGenerator, shouldShowCallback);
       a.register();
       return a;
@@ -27,7 +27,7 @@
       return {generate: function(){return {url: url || '/redirect', state: state || 'state'}}};
     };
     findModals = function() {
-      return $("[data-id=" + (new SamaritanJs.OAuth.AutoRefresh).modalDataId + "]");
+      return $("[data-id=" + (new Dash.OAuth.AutoRefresh).modalDataId + "]");
     };
     tick = function(seconds) {
       return jasmine.Clock.tick(seconds * 1000);
@@ -37,15 +37,15 @@
     });
     cleanup = function(autoRefresh) {
       autoRefresh.cleanUp();
-      return SamaritanJs.OAuth.AutoRefresh.expireFlag();
+      return Dash.OAuth.AutoRefresh.expireFlag();
     };
     it('sets an timeout for the time in milliseconds', function() {
       var autoRefresh;
 
-      spyOn(Browser, 'setTimeout');
+      spyOn(Dash.Browser, 'setTimeout');
       spyOn(Date, 'now').andReturn(1396443193877);
       autoRefresh = registerApp(profileAppId, createMockUrlGenerator(), '123');
-      expect(Browser.setTimeout.mostRecentCall.args[1]).toEqual(123 * 1000);
+      expect(Dash.Browser.setTimeout.mostRecentCall.args[1]).toEqual(123 * 1000);
       return cleanup(autoRefresh);
     });
     it('expires the token', function() {
@@ -53,16 +53,16 @@
 
       autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
       tick(1);
-      expect(SamaritanJs.OAuth.TokenAccessor.get(profileAppId)).toBeUndefined();
+      expect(Dash.OAuth.TokenAccessor.get(profileAppId)).toBeUndefined();
       return cleanup(autoRefresh);
     });
     it('sets a cookie to signify future request will be an autorefresh request', function() {
       var autoRefresh;
 
       autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
-      expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
+      expect(Dash.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
       tick(1);
-      expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeTruthy();
+      expect(Dash.OAuth.AutoRefresh.isFlagSet()).toBeTruthy();
       return cleanup(autoRefresh);
     });
     it('sets a new state', function() {
@@ -72,7 +72,7 @@
 
       autoRefresh = registerCurrentApp(profileAppId, urlGenerator, 1);
       tick(1);
-      expect((new SamaritanJs.OAuth.TokenValidator(state)).isValidState()).toBeTruthy();
+      expect((new Dash.OAuth.TokenValidator(state)).isValidState()).toBeTruthy();
       return cleanup(autoRefresh);
     });
     it('opens a refresh modal with the generated url', function() {
@@ -82,11 +82,11 @@
         remove: function(){}
       }
 
-      spyOn(SamaritanJs.OAuth, 'TokenRefreshIframe').andReturn(fakeIframe);
+      spyOn(Dash.OAuth, 'TokenRefreshIframe').andReturn(fakeIframe);
       url = 'test/url';
       autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(url), 1);
       tick(1);
-      openedUrl = SamaritanJs.OAuth.TokenRefreshIframe.mostRecentCall.args[0];
+      openedUrl = Dash.OAuth.TokenRefreshIframe.mostRecentCall.args[0];
       expect(openedUrl).toEqual(url);
       return cleanup(autoRefresh);
     });
@@ -106,7 +106,7 @@
       autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(), 1);
       tick(1);
       expect(findModals()).toExist();
-      SamaritanJs.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
+      Dash.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
       tick(0.2);
       expect(findModals()).not.toExist();
       return cleanup(autoRefresh);
@@ -114,26 +114,26 @@
     it('expires "isAutoRefresh" cookie and sets browser location to url after maxWaitForToken', function() {
       var autoRefresh, url;
 
-      spyOn(Browser.Location, 'change');
+      spyOn(Dash.Browser.Location, 'change');
       url = 'someurl';
       autoRefresh = registerCurrentApp(profileAppId, createMockUrlGenerator(url), 20);
       maxWaitInSeconds = autoRefresh.maxWaitForToken / 1000
       tick(20);
       expect(findModals()).toExist();
-      expect(Browser.Location.change).not.toHaveBeenCalled();
+      expect(Dash.Browser.Location.change).not.toHaveBeenCalled();
       tick(maxWaitInSeconds);
-      expect(SamaritanJs.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
-      expect(Browser.Location.change).toHaveBeenCalledWith(url);
+      expect(Dash.OAuth.AutoRefresh.isFlagSet()).toBeFalsy();
+      expect(Dash.Browser.Location.change).toHaveBeenCalledWith(url);
       return cleanup(autoRefresh);
     });
     it('re-registers when the modal is closed', function() {
       var autoRefresh;
 
-      spyOn(Browser, 'setTimeout').andCallThrough();
+      spyOn(Dash.Browser, 'setTimeout').andCallThrough();
       autoRefresh = createAutoRefresh(profileAppId, createMockUrlGenerator(), 1);
-      SamaritanJs.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
+      Dash.OAuth.TokenAccessor.set(profileAppId, 'sfadghjfd32456trfgd', 1);
       autoRefresh.closeModal();
-      expect(Browser.setTimeout.calls.length).toEqual(1);
+      expect(Dash.Browser.setTimeout.calls.length).toEqual(1);
       return cleanup(autoRefresh);
     });
     return it('can take a custom callback to determine if it should show', function() {

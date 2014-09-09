@@ -1,6 +1,6 @@
-describe('SamaritanJs.OAuth.TokenRefreshIframe', function() {
+describe('Dash.OAuth.TokenRefreshIframe', function() {
   var createModal = function(url) {
-    return new SamaritanJs.OAuth.TokenRefreshIframe(url);
+    return new Dash.OAuth.TokenRefreshIframe(url);
   };
 
   var cleanUpModal = function(modal) {

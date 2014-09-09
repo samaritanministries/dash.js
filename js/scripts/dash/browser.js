@@ -1,9 +1,9 @@
-namespace('Browser');
+namespace('Dash.Browser');
 
 (function() {
   'use strict';
 
-  Browser.Location = {
+  Dash.Browser.Location = {
     change: function(url) {
       window.location.replace(url);
     },
@@ -21,23 +21,23 @@ namespace('Browser');
     }
   };
 
-  Browser.changeTitle = function(title) {
+  Dash.Browser.changeTitle = function(title) {
     document.title = title;
   };
 
-  Browser.open = function(url, options) {
+  Dash.Browser.open = function(url, options) {
     return window.open(url, '_blank', options);
   };
 
-  Browser.setTimeout = function(fn, timeInMilliseconds) {
+  Dash.Browser.setTimeout = function(fn, timeInMilliseconds) {
     return window.setTimeout(fn, timeInMilliseconds);
   };
 
-  Browser.setInterval = function(fn, timeInMilliseconds) {
+  Dash.Browser.setInterval = function(fn, timeInMilliseconds) {
     return window.setInterval(fn, timeInMilliseconds);
   };
 
-  Browser.isInIframe = function() {
+  Dash.Browser.isInIframe = function() {
     try {
       return window.self !== window.top;
     } catch (e) {
@@ -45,22 +45,22 @@ namespace('Browser');
     }
   };
 
-  Browser.postMessage = function(message, origin, win) {
+  Dash.Browser.postMessage = function(message, origin, win) {
     if (win == null) {
       win = window;
     }
     win.postMessage(message, origin);
   };
 
-  Browser.scrollTo = function(x, y, url) {
-    if (Browser.isInIframe()) {
+  Dash.Browser.scrollTo = function(x, y, url) {
+    if (Dash.Browser.isInIframe()) {
       window.top.postMessage("scrollTo:" + y, url || '*');
     } else {
       window.scrollTo(x, y);
     }
   };
 
-  Browser.notifyDoneLoading = function(appId, url) {
+  Dash.Browser.notifyDoneLoading = function(appId, url) {
     var message = {
       type:    "notify",
       message: "doneLoading",
@@ -69,7 +69,7 @@ namespace('Browser');
     window.top.postMessage(JSON.stringify(message), url);
   };
 
-  Browser.notifyLoggedOut = function(appId, url) {
+  Dash.Browser.notifyLoggedOut = function(appId, url) {
     var message = {
       type:    "notify",
       message: "logout",

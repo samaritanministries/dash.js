@@ -1,6 +1,6 @@
 {
-  "name": "samaritan-js",
-  "version": "0.0.30",
+  "name": "dash.js",
+  "version": "1.0.0",
   "dependencies": {
     "cookies-js": "~0.3.1",
     "uuid-js": "~0.7.4",
@@ -14,14 +14,15 @@
     "smi <smi@8thlight.com>"
   ],
   "description": "Use Samaritan OAuth abilities to build front-end applications",
-  "main": "dist/samaritan-js.min.js",
+  "main": "dist/dash.min.js",
   "keywords": [
-    "samaritan"
+    "samaritan",
+    "dash"
   ],
   "license": "MIT",
   "homepage": "samaritanministries.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/samaritanministries/samaritan-js.git"
+    "url": "https://github.com/samaritanministries/dash.js.git"
   }
 }

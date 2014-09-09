@@ -1,9 +1,9 @@
-namespace('SamaritanJs');
+namespace('Dash');
 
 (function (TokenAccessor, Browser) {
   'use strict';
 
-  SamaritanJs.Redirector = function (redirectUrl) {
+  Dash.Redirector = function (redirectUrl) {
     this.redirectUrl = redirectUrl;
 
     this.register = function() {
@@ -27,4 +27,4 @@ namespace('SamaritanJs');
     };
   };
 
-}(SamaritanJs.OAuth.TokenAccessor, Browser.Location));
+}(Dash.OAuth.TokenAccessor, Dash.Browser.Location));

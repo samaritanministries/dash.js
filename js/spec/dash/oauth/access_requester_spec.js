@@ -1,8 +1,8 @@
-describe("Making a call for oauth access", function() {
-  var Cookie = SamaritanJs.OAuth.Cookie;
-  var Location = Browser.Location;
+describe("Dash.OAuth.AccessRequester", function() {
+  var Cookie = Dash.OAuth.Cookie;
+  var Location = Dash.Browser.Location;
   var createAccessRequester = function(urlGenerator) {
-    return new SamaritanJs.OAuth.AccessRequester(urlGenerator);
+    return new Dash.OAuth.AccessRequester(urlGenerator);
   };
   var createMockUrlGenerator = function() {
     return {generate: function(){return {url: '/redirect', state: 'state'}}};

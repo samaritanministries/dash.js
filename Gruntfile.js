@@ -9,24 +9,24 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/samaritan-js.min.js': [
+          'dist/dash.min.js': [
             '.tmp/js/scripts/bower_components/uuid-js/lib/uuid.js',
             '.tmp/js/scripts/bower_components/cookies-js/src/cookies.js',
             '.tmp/js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
             '.tmp/js/scripts/namespace.js',
-            '.tmp/js/scripts/browser.js',
-            '.tmp/js/scripts/samaritan_js/notify.js',
-            '.tmp/js/scripts/samaritan_js/scroll.js',
-            '.tmp/js/scripts/samaritan_js/oauth/cookie.js',
-            '.tmp/js/scripts/samaritan_js/oauth/params.js',
-            '.tmp/js/scripts/samaritan_js/oauth/url_generator.js',
-            '.tmp/js/scripts/samaritan_js/oauth/token_accessor.js',
-            '.tmp/js/scripts/samaritan_js/oauth/token_refresh_iframe.js',
-            '.tmp/js/scripts/samaritan_js/oauth/token_validator.js',
-            '.tmp/js/scripts/samaritan_js/oauth/access_requester.js',
-            '.tmp/js/scripts/samaritan_js/oauth/auto_refresh.js',
-            '.tmp/js/scripts/samaritan_js/oauth/response.js',
-            '.tmp/js/scripts/samaritan_js/redirector.js'
+            '.tmp/js/scripts/dash/browser.js',
+            '.tmp/js/scripts/dash/notify.js',
+            '.tmp/js/scripts/dash/scroll.js',
+            '.tmp/js/scripts/dash/oauth/cookie.js',
+            '.tmp/js/scripts/dash/oauth/params.js',
+            '.tmp/js/scripts/dash/oauth/url_generator.js',
+            '.tmp/js/scripts/dash/oauth/token_accessor.js',
+            '.tmp/js/scripts/dash/oauth/token_refresh_iframe.js',
+            '.tmp/js/scripts/dash/oauth/token_validator.js',
+            '.tmp/js/scripts/dash/oauth/access_requester.js',
+            '.tmp/js/scripts/dash/oauth/auto_refresh.js',
+            '.tmp/js/scripts/dash/oauth/response.js',
+            '.tmp/js/scripts/dash/redirector.js'
           ]
         }
       }
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
     scripts: {
       src: [
         'js/scripts/namespace.js',
-        'js/scripts/browser.js',
+        'js/scripts/dash/browser.js',
         'js/scripts/bower_components/jquery/jquery.js',
         'js/scripts/bower_components/uuid-js/lib/uuid.js',
         'js/scripts/bower_components/cookies-js/src/cookies.js',

@@ -1,12 +1,12 @@
-describe("Scroll", function() {
+describe("Dash.Scroll", function() {
   it("scrolls to an element", function() {
     setFixtures('<div id="the-div"></div>');
-    spyOn(Browser, 'scrollTo');
+    spyOn(Dash.Browser, 'scrollTo');
     var topOffset = $('#the-div').offset().top;
     var padding = 12;
     var url = 'http://example.com';
-    SamaritanJs.Scroll.toElement('#the-div', url, padding);
-    expect(Browser.scrollTo).toHaveBeenCalledWith(0, topOffset - padding, url);
+    Dash.Scroll.toElement('#the-div', url, padding);
+    expect(Dash.Browser.scrollTo).toHaveBeenCalledWith(0, topOffset - padding, url);
   });
 
   describe("#registerFixedElements", function() {
@@ -15,9 +15,9 @@ describe("Scroll", function() {
       var done = false;
       var offset = 20;
       var platformOffset = 123;
-      SamaritanJs.Scroll.registerFixedElements('#the-el', offset, window.location.origin);
+      Dash.Scroll.registerFixedElements('#the-el', offset, window.location.origin);
 
-      Browser.postMessage("fixedPositionOffset:" + platformOffset, '*');
+      Dash.Browser.postMessage("fixedPositionOffset:" + platformOffset, '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -30,10 +30,10 @@ describe("Scroll", function() {
       setFixtures('<div id="the-div"><div id="the-second-el" style="position:fixed;"></div></div>');
       var done = false;
       var originalOffset = $('#the-second-el').offset().top;
-      var callback = SamaritanJs.Scroll.registerFixedElements('#the-second-el', 20, window.location.origin);
+      var callback = Dash.Scroll.registerFixedElements('#the-second-el', 20, window.location.origin);
       callback();
 
-      Browser.postMessage("fixedPositionOffset:123", '*');
+      Dash.Browser.postMessage("fixedPositionOffset:123", '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -46,9 +46,9 @@ describe("Scroll", function() {
       setFixtures('<div id="the-div"><div id="the-third-el" style="position:fixed;"></div></div>');
       var done = false;
       var originalOffset = $('#the-third-el').offset().top;
-      var callback = SamaritanJs.Scroll.registerFixedElements('#the-third-el', 20, 'https://example.com');
+      var callback = Dash.Scroll.registerFixedElements('#the-third-el', 20, 'https://example.com');
 
-      Browser.postMessage("fixedPositionOffset:123", '*');
+      Dash.Browser.postMessage("fixedPositionOffset:123", '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -60,14 +60,14 @@ describe("Scroll", function() {
 
   describe("#registerInfiniteScroll in an iframe", function() {
     beforeEach(function() {
-      spyOn(Browser, 'isInIframe').andReturn(true);
+      spyOn(Dash.Browser, 'isInIframe').andReturn(true);
     });
 
     it("doesn't call the callback function when not scrolled to the bottom of the element", function() {
       setFixtures('<div id="the-div"><div id="the-el" style="height:3000px;"></div></div>');
       var done = false;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
 
       message = {
         type: 'infiniteScroll',
@@ -75,7 +75,7 @@ describe("Scroll", function() {
         windowScrollTop: 0,
         iframeOffsetTop: 0
       }
-      Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -91,7 +91,7 @@ describe("Scroll", function() {
       var windowScrollTop = $('#the-el').offset().top;
       var iframeOffsetTop = 0;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
 
       message = {
         type: 'infiniteScroll',
@@ -99,7 +99,7 @@ describe("Scroll", function() {
         windowScrollTop: windowScrollTop,
         iframeOffsetTop: iframeOffsetTop
       }
-      Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -115,7 +115,7 @@ describe("Scroll", function() {
       var windowScrollTop = $('#the-el').offset().top;
       var iframeOffsetTop = 0;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
 
       message = {
         type: 'infiniteScroll',
@@ -123,8 +123,8 @@ describe("Scroll", function() {
         windowScrollTop: windowScrollTop,
         iframeOffsetTop: iframeOffsetTop
       }
-      Browser.postMessage(JSON.stringify(message), '*');
-      Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -140,7 +140,7 @@ describe("Scroll", function() {
       var windowScrollTop = $('#the-el').offset().top;
       var iframeOffsetTop = 0;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      var cancelCallback = SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
+      var cancelCallback = Dash.Scroll.registerInfiniteScroll('#the-el', callback, window.location.origin);
       cancelCallback();
 
       message = {
@@ -149,7 +149,7 @@ describe("Scroll", function() {
         windowScrollTop: windowScrollTop,
         iframeOffsetTop: iframeOffsetTop
       }
-      Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -165,7 +165,7 @@ describe("Scroll", function() {
       var windowScrollTop = $('#the-el').offset().top;
       var iframeOffsetTop = 0;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback, 'http://example.com');
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback, 'http://example.com');
 
       message = {
         type: 'infiniteScroll',
@@ -173,7 +173,7 @@ describe("Scroll", function() {
         windowScrollTop: windowScrollTop,
         iframeOffsetTop: iframeOffsetTop
       }
-      Browser.postMessage(JSON.stringify(message), '*');
+      Dash.Browser.postMessage(JSON.stringify(message), '*');
       waitsFor(function(){ return done; }, '', 3);
 
       runs(function(){
@@ -185,7 +185,7 @@ describe("Scroll", function() {
 
   describe("#registerInfiniteScroll not in an iframe", function() {
     beforeEach(function() {
-      spyOn(Browser, 'isInIframe').andReturn(false);
+      spyOn(Dash.Browser, 'isInIframe').andReturn(false);
       setFixtures('<div id="the-div"><div id="the-el"></div><div id="other"></div></div>');
       $('#the-el').css('height', 5 * $(window).height());
       $('#other').css('height', 5 * $(window).height());
@@ -194,7 +194,7 @@ describe("Scroll", function() {
     it("doesn't call the callback function when not scrolled to the bottom of the element", function() {
       var done = false;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback);
 
       $(window).scroll();
       waitsFor(function(){ return done; }, '', 40);
@@ -209,7 +209,7 @@ describe("Scroll", function() {
     xit("calls the callback function when scrolled to the bottom of the element", function() {
       var done = false;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback);
 
       var el = $('#the-el');
       window.scrollTo(0, $(document).height());
@@ -224,7 +224,7 @@ describe("Scroll", function() {
     it("only calls the callback function once when scrolled to the bottom of the element", function() {
       var done = false;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback);
+      Dash.Scroll.registerInfiniteScroll('#the-el', callback);
 
       var el = $('#the-el');
       window.scrollTo(0, $(document).height());
@@ -240,7 +240,7 @@ describe("Scroll", function() {
     it("returns a callback function to deregister the event listener", function() {
       var done = false;
       var callback = jasmine.createSpy('infiniteScrollCallback');
-      var removeCallback = SamaritanJs.Scroll.registerInfiniteScroll('#the-el', callback);
+      var removeCallback = Dash.Scroll.registerInfiniteScroll('#the-el', callback);
       removeCallback();
 
       var el = $('#the-el');

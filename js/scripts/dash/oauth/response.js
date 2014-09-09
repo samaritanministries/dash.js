@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function() {
   'use strict';
 
-  SamaritanJs.OAuth.Response = function(locationHash) {
+  Dash.OAuth.Response = function(locationHash) {
     this.normalizedLocationHash = function(locationHash) {
       var parts;
       parts = locationHash.split('#');
@@ -14,7 +14,7 @@ namespace('SamaritanJs.OAuth');
       }
     };
 
-    this.params = new SamaritanJs.OAuth.Params(this.normalizedLocationHash(locationHash));
+    this.params = new Dash.OAuth.Params(this.normalizedLocationHash(locationHash));
 
     this.token = function() {
       return this.params.get('access_token');
@@ -32,7 +32,7 @@ namespace('SamaritanJs.OAuth');
       var expiresIn, state, tokenValidator;
       state = this.params.get('state');
       expiresIn = this.params.get('expires_in');
-      tokenValidator = new SamaritanJs.OAuth.TokenValidator(state, this.token(), expiresIn);
+      tokenValidator = new Dash.OAuth.TokenValidator(state, this.token(), expiresIn);
       return tokenValidator.isValidState();
     };
 

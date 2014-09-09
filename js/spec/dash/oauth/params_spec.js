@@ -1,6 +1,6 @@
-describe("accessing the params", function() {
+describe("Dash.OAuth.Params", function() {
   var createParams = function(queryString) {
-    return new SamaritanJs.OAuth.Params(queryString);
+    return new Dash.OAuth.Params(queryString);
   }
 
   it("splits out the key value pairs", function() {

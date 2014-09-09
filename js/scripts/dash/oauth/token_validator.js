@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function(Cookie) {
   'use strict';
 
-  SamaritanJs.OAuth.TokenValidator = function(state, token, expiresIn) {
+  Dash.OAuth.TokenValidator = function(state, token, expiresIn) {
     this.expiration = expiresIn;
     this.state = state;
     this.token = token;
@@ -29,4 +29,4 @@ namespace('SamaritanJs.OAuth');
     };
   };
 
-}(SamaritanJs.OAuth.Cookie));
+}(Dash.OAuth.Cookie));

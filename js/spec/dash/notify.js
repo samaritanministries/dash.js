@@ -1,11 +1,11 @@
-describe("Notify", function() {
+describe("Dash.Notify", function() {
   it("sends a logged out notification to the top window", function() {
     var done = false;
     var message;
     var appId = 'test';
     window.addEventListener('message', function(event){ message = event.data;}, false);
 
-    SamaritanJs.Notify.loggedOut(appId, window.location.origin);
+    Dash.Notify.loggedOut(appId, window.location.origin);
 
     waitsFor(function(){ return done; }, '', 3);
     runs(function(){
@@ -22,7 +22,7 @@ describe("Notify", function() {
     var message;
     window.addEventListener('message', function(event){ message = event.data;}, false);
 
-    SamaritanJs.Notify.loggedOut('test', "http://badurl.com");
+    Dash.Notify.loggedOut('test', "http://badurl.com");
 
     waitsFor(function(){ return done; }, '', 3);
     runs(function(){
@@ -37,7 +37,7 @@ describe("Notify", function() {
     var appId = 'test';
     window.addEventListener('message', function(event){ message = event.data;}, false);
 
-    SamaritanJs.Notify.doneLoading(appId, window.location.origin);
+    Dash.Notify.doneLoading(appId, window.location.origin);
 
     waitsFor(function(){ return done; }, '', 3);
     runs(function(){
@@ -55,7 +55,7 @@ describe("Notify", function() {
     var appId = 'test';
     window.addEventListener('message', function(event){ message = event.data;}, false);
 
-    SamaritanJs.Notify.doneLoading(appId, "http://badurl.com");
+    Dash.Notify.doneLoading(appId, "http://badurl.com");
 
     waitsFor(function(){ return done; }, '', 3);
     runs(function(){

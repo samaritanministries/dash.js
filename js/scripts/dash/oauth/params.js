@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function() {
   'use strict';
 
-  SamaritanJs.OAuth.Params = function(queryString) {
+  Dash.OAuth.Params = function(queryString) {
 
   this.queryString = queryString;
 

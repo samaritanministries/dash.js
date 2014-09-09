@@ -1,7 +1,7 @@
-describe("Validating a token", function() {
-  var Cookie = SamaritanJs.OAuth.Cookie;
+describe("Dash.OAuth.TokenValidator", function() {
+  var Cookie = Dash.OAuth.Cookie;
   var createTokenValidator = function(state, token, expiration) {
-    return new SamaritanJs.OAuth.TokenValidator(state, token, expiration);
+    return new Dash.OAuth.TokenValidator(state, token, expiration);
   }
 
   beforeEach(function() {

@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function() {
   'use strict';
 
-  SamaritanJs.OAuth.TokenRefreshIframe = function(url) {
+  Dash.OAuth.TokenRefreshIframe = function(url) {
     this.modalDataId = 'refresh-modal';
     this.$el        = $('<iframe data-id="' + this.modalDataId + '" src="' + url + '"></iframe>');
 

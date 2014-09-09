@@ -1,6 +1,6 @@
-describe("Generating an OAuth Url", function() {
+describe("Dash.OAuth.UrlGenerator", function() {
   var createUrlGenerator = function(options) {
-    return new SamaritanJs.OAuth.UrlGenerator(options);
+    return new Dash.OAuth.UrlGenerator(options);
   }
 
   it("has a base url", function() {

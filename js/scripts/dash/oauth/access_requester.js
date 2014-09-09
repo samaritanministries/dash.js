@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function(Cookie, Browser) {
   'use strict';
 
-SamaritanJs.OAuth.AccessRequester = function(urlGenerator) {
+Dash.OAuth.AccessRequester = function(urlGenerator) {
   var FIVE_MINUTES_IN_SECONDS = 300;
   this.urlGenerator = urlGenerator;
 
@@ -22,4 +22,4 @@ SamaritanJs.OAuth.AccessRequester = function(urlGenerator) {
   };
 };
 
-}(SamaritanJs.OAuth.Cookie, Browser));
+}(Dash.OAuth.Cookie, Dash.Browser));

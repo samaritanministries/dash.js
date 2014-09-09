@@ -1,9 +1,9 @@
-namespace('SamaritanJs.Scroll');
+namespace('Dash.Scroll');
 
 (function() {
   'use strict';
 
-  SamaritanJs.Scroll.toElement = function(element, url, padding) {
+  Dash.Scroll.toElement = function(element, url, padding) {
     var padding;
     if (padding == null) {
       padding = 10;
@@ -12,10 +12,10 @@ namespace('SamaritanJs.Scroll');
     var offset = $(element).offset() || {top: 0};
     var topOffset = offset.top;
     var pixelsFromTop = topOffset - padding;
-    Browser.scrollTo(0, pixelsFromTop, url);
+    Dash.Browser.scrollTo(0, pixelsFromTop, url);
   };
 
-  SamaritanJs.Scroll.registerFixedElements = function(selector, offset, url) {
+  Dash.Scroll.registerFixedElements = function(selector, offset, url) {
     var messageHandler = function(event) {
       if (event.origin == url && /^fixedPositionOffset:/.test(event.data)) {
         var pixelsFromTop = parseFloat(event.data.split(':')[1]);
@@ -28,15 +28,15 @@ namespace('SamaritanJs.Scroll');
     };
   };
 
-  SamaritanJs.Scroll.registerInfiniteScroll = function(selector, callback, url) {
-    if (Browser.isInIframe()) {
-      return SamaritanJs.Scroll.registerInfiniteScrollIframe(selector, callback, url);
+  Dash.Scroll.registerInfiniteScroll = function(selector, callback, url) {
+    if (Dash.Browser.isInIframe()) {
+      return Dash.Scroll.registerInfiniteScrollIframe(selector, callback, url);
     } else {
-      return SamaritanJs.Scroll.registerInfiniteScrollNonIframe(selector, callback, url);
+      return Dash.Scroll.registerInfiniteScrollNonIframe(selector, callback, url);
     };
   };
 
-  SamaritanJs.Scroll.registerInfiniteScrollNonIframe = function(selector, callback, url) {
+  Dash.Scroll.registerInfiniteScrollNonIframe = function(selector, callback, url) {
     var removeWrapper = {};
     var scrollHandler = function() {
       var bottomOfWindow = $(window).height() + $(window).scrollTop();
@@ -57,7 +57,7 @@ namespace('SamaritanJs.Scroll');
     return removeHandler;
   };
 
-  SamaritanJs.Scroll.registerInfiniteScrollIframe = function(selector, callback, url) {
+  Dash.Scroll.registerInfiniteScrollIframe = function(selector, callback, url) {
     var removeWrapper = {};
 
     var shouldTriggerCallback = function(message) {

@@ -1,8 +1,8 @@
-describe('TokenAccessor', function() {
+describe('Dash.OAuth.TokenAccessor', function() {
   var token = '34rdfcfgtbrn89',
       appId = 'testAppId',
-      TokenAccessor = SamaritanJs.OAuth.TokenAccessor,
-      Cookie = SamaritanJs.OAuth.Cookie;
+      TokenAccessor = Dash.OAuth.TokenAccessor,
+      Cookie = Dash.OAuth.Cookie;
 
   it('saves a token with an appId', function() {
     TokenAccessor.set(appId, token);

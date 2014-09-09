@@ -1,4 +1,5 @@
 #!/bin/bash
+echo 'Make sure everything is added!'
 echo -n 'Current version: '
 grep 'version' bower.json | sed -n 's/^.*['"'"'"]version['"'"'"] *: *['"'"'"]\([^'"'"'"]*\).*$/\1/p'
 

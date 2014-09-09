@@ -1,9 +1,9 @@
-namespace('SamaritanJs.OAuth');
+namespace('Dash.OAuth');
 
 (function(Cookie) {
   'use strict';
 
-  SamaritanJs.OAuth.TokenAccessor = {
+  Dash.OAuth.TokenAccessor = {
     set: function(appId, token, expiresInSeconds) {
       expiresInSeconds = parseInt(expiresInSeconds);
       Cookie.set(this.key(appId), token, {expires: expiresInSeconds});
@@ -59,5 +59,5 @@ namespace('SamaritanJs.OAuth');
       });
     }
   };
-}(SamaritanJs.OAuth.Cookie));
+}(Dash.OAuth.Cookie));
 
