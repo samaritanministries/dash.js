@@ -36,12 +36,15 @@ module.exports = function (grunt) {
     scripts: {
       src: [
         'js/scripts/namespace.js',
-        'js/scripts/dash/browser.js',
         'js/scripts/bower_components/jquery/jquery.js',
         'js/scripts/bower_components/uuid-js/lib/uuid.js',
         'js/scripts/bower_components/cookies-js/src/cookies.js',
         'js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
-        'js/scripts/samaritan_js/**/*.js',
+        'js/scripts/dash/browser.js',
+        'js/scripts/dash/notify.js',
+        'js/scripts/dash/redirector.js',
+        'js/scripts/dash/scroll.js',
+        'js/scripts/dash/oauth/*.js'
       ],
       dest: '.tmp/'
     }
