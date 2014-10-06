@@ -9,7 +9,7 @@ Dash.OAuth.UrlGenerator = function(urlOptions) {
   this.context      = urlOptions.context;
   this.redirectUrl  = urlOptions.redirectUrl;
   this.responseType = urlOptions.responseType;
-  this.scopes       = urlOptions.scopes || [ "identity", "needs", 'profile', "membership", "enroll"];
+  this.scopes       = urlOptions.scopes;
 
   this.generate = function() {
     var state = UUID.create().hex;
