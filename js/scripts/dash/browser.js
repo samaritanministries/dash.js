@@ -21,6 +21,12 @@ namespace('Dash.Browser');
     }
   };
 
+  Dash.Browser.Navigator = {
+    userAgent: function() {
+      return window.navigator.userAgent;
+    }
+  };
+
   Dash.Browser.changeTitle = function(title) {
     document.title = title;
   };
