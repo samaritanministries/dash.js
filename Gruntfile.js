@@ -12,11 +12,8 @@ module.exports = function (grunt) {
           'dist/dash.min.js': [
             '.tmp/js/scripts/bower_components/uuid-js/lib/uuid.js',
             '.tmp/js/scripts/bower_components/cookies-js/src/cookies.js',
-            '.tmp/js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
             '.tmp/js/scripts/namespace.js',
             '.tmp/js/scripts/dash/browser.js',
-            '.tmp/js/scripts/dash/notify.js',
-            '.tmp/js/scripts/dash/scroll.js',
             '.tmp/js/scripts/dash/oauth/cookie.js',
             '.tmp/js/scripts/dash/oauth/params.js',
             '.tmp/js/scripts/dash/oauth/url_generator.js',
@@ -39,11 +36,8 @@ module.exports = function (grunt) {
         'js/scripts/bower_components/jquery/jquery.js',
         'js/scripts/bower_components/uuid-js/lib/uuid.js',
         'js/scripts/bower_components/cookies-js/src/cookies.js',
-        'js/scripts/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
         'js/scripts/dash/browser.js',
-        'js/scripts/dash/notify.js',
         'js/scripts/dash/redirector.js',
-        'js/scripts/dash/scroll.js',
         'js/scripts/dash/oauth/*.js'
       ],
       dest: '.tmp/'

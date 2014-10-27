@@ -1,10 +1,9 @@
 {
   "name": "dash.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {
     "cookies-js": "~0.3.1",
-    "uuid-js": "~0.7.4",
-    "iframe-resizer": "~2.2.3"
+    "uuid-js": "~0.7.4"
   },
   "devDependencies": {
     "jquery": "2.1.0",

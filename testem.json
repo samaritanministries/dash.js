@@ -7,8 +7,6 @@
     "js/scripts/bower_components/cookies-js/src/cookies.js",
     "js/scripts/namespace.js",
     "js/scripts/dash/browser.js",
-    "js/scripts/dash/notify.js",
-    "js/scripts/dash/scroll.js",
     "js/scripts/dash/oauth/cookie.js",
     "js/scripts/dash/oauth/params.js",
     "js/scripts/dash/oauth/token_accessor.js",

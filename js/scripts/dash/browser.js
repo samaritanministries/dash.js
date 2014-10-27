@@ -50,38 +50,5 @@ namespace('Dash.Browser');
       return true;
     }
   };
-
-  Dash.Browser.postMessage = function(message, origin, win) {
-    if (win == null) {
-      win = window;
-    }
-    win.postMessage(message, origin);
-  };
-
-  Dash.Browser.scrollTo = function(x, y, url) {
-    if (Dash.Browser.isInIframe()) {
-      window.top.postMessage("scrollTo:" + y, url || '*');
-    } else {
-      window.scrollTo(x, y);
-    }
-  };
-
-  Dash.Browser.notifyDoneLoading = function(appId, url) {
-    var message = {
-      type:    "notify",
-      message: "doneLoading",
-      app:     appId
-    };
-    window.top.postMessage(JSON.stringify(message), url);
-  };
-
-  Dash.Browser.notifyLoggedOut = function(appId, url) {
-    var message = {
-      type:    "notify",
-      message: "logout",
-      app:     appId
-    };
-    window.top.postMessage(JSON.stringify(message), url);
-  };
 }());
 
