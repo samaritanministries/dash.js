@@ -4,12 +4,8 @@ describe("Dash.Browser", function() {
     expect(Dash.Browser.Navigator.userAgent()).toEqual(jasmine.any(String));
   });
 
-  it("returns false when browser location does not include platform pathname", function() {
+  it("returns false when browser location does not match the passed in url", function() {
     expect(Dash.Browser.Location.isIFramedBy('https://someurl.org/')).toBeFalsy();
-  });
-
-  it("returns true when browser location is in dev environment", function() {
-    expect(Dash.Browser.Location.isIFramedBy('https://localhost')).toBeTruthy();
   });
 
 });
