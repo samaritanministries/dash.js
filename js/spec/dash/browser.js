@@ -5,7 +5,7 @@ describe("Dash.Browser", function() {
   });
 
   it("returns false when browser location does not match the passed in url", function() {
-    expect(Dash.Browser.Location.isIFramedBy('https://someurl.org/')).toBeFalsy();
+    expect(Dash.Browser.isIFramedBy('https://someurl.org/')).toBeFalsy();
   });
 
 });

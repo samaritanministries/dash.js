@@ -8,10 +8,6 @@ namespace('Dash.Browser');
       window.location.replace(url);
     },
 
-    isIFramedBy: function(url) {
-      return (url.match(window.top.location.href) != null);
-    },
-
     hash: function() {
       return window.location.hash;
     },
@@ -55,4 +51,11 @@ namespace('Dash.Browser');
     }
   };
 
-}());
+  Dash.Browser.isIFramedBy = function(origin) {
+    if (Dash.Browser.isInIframe()) {
+      return window.top.location.origin === origin;
+    }
+  }
+
+}
+());
