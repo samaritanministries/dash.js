@@ -35,6 +35,10 @@ namespace('Dash.Browser');
     return window.open(url, '_blank', options);
   };
 
+  Dash.Browser.close = function() {
+    window.close();
+  };
+
   Dash.Browser.setTimeout = function(fn, timeInMilliseconds) {
     return window.setTimeout(fn, timeInMilliseconds);
   };
