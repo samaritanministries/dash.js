@@ -59,7 +59,11 @@ namespace('Dash.Browser');
     if (Dash.Browser.isInIframe()) {
       return window.top.location.origin === origin;
     }
-  }
+  };
+
+  Dash.Browser.scrollToTop = function() {
+    window.parent.postMessage('scrollTo:0', window.location.origin)
+  };
 
 }
 ());
