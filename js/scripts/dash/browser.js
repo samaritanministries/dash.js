@@ -65,5 +65,9 @@ namespace('Dash.Browser');
     window.parent.postMessage('scrollTo:0', window.location.origin)
   };
 
+  Dash.Browser.scrollToBottom = function() {
+    window.scrollTo(0,document.body.scrollHeight);
+  };
+
 }
 ());
