@@ -1,5 +1,6 @@
 {
   "framework": "jasmine",
+  "launch_in_ci": ["PhantomJS"],
   "src_files": [
     "js/scripts/bower_components/jquery/dist/jquery.js",
     "js/scripts/bower_components/jasmine-jquery/lib/jasmine-jquery.js",

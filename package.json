@@ -1,6 +1,10 @@
 {
   "name": "dash.js",
   "version": "1.0.6",
+  "repository": {
+    "type": "git",
+    "url": "git://git@github.com:samaritanministries/dash.js.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt":                "~0.4.1",
@@ -8,7 +12,12 @@
     "grunt-contrib-copy":   "~0.5.0",
     "grunt-contrib-clean":  "~0.5.0",
     "grunt-sass" :          "~0.10.0",
-    "load-grunt-tasks":     "~0.1.0"
+    "load-grunt-tasks":     "~0.1.0",
+    "phantomjs":            "~1.9.16",
+    "testem":               "~0.7.6"
+  },
+  "scripts": {
+    "test": "testem ci"
   },
   "engines": {
     "node": ">=0.8.0"

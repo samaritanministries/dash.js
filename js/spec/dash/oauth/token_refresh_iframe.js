@@ -13,7 +13,7 @@ describe('Dash.OAuth.TokenRefreshIframe', function() {
 
     modal.render();
 
-    expect($('iframe').attr('src')).toEqual(url)
+    expect($('iframe[data-id=refresh-modal]').attr('src')).toEqual(url)
     cleanUpModal(modal);
   });
 
