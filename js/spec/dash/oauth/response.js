@@ -22,7 +22,7 @@ describe("Dash.OAuth.Response", function() {
     });
 
     it('knows if the state is invalid', function() {
-      var locationHash, response
+      var locationHash, response;
       locationHash = "#/profile#access_token=my_token&state=invalid";
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.isValidState()).toBeFalsy();

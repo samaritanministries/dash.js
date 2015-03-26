@@ -23,9 +23,11 @@ namespace('Dash.OAuth');
         _this = this;
       timeInSeconds = Dash.OAuth.TokenAccessor.getExpiresIn(this.appId);
       timeoutInMilliseconds = timeInSeconds * 1000;
-      return this.timeoutId = Dash.Browser.setTimeout((function() {
+      this.timeoutId = Dash.Browser.setTimeout((function() {
         return _this.trigger();
       }), timeoutInMilliseconds);
+
+      return this.timeoutId;
     };
 
     AutoRefresh.prototype.trigger = function() {
@@ -43,10 +45,12 @@ namespace('Dash.OAuth');
       (new Dash.OAuth.AccessRequester()).storeState(urlAndState.state);
       this.modal = this.createModal(urlAndState.url);
       this.modal.render();
-      this.refreshPageTimeoutId = Dash.Browser.setTimeout(function(){_this.refreshLocation(urlAndState.url)}, this.maxWaitForToken);
-      return this.intervalId = Dash.Browser.setInterval((function() {
+      this.refreshPageTimeoutId = Dash.Browser.setTimeout(function(){_this.refreshLocation(urlAndState.url);}, this.maxWaitForToken);
+      this.intervalId = Dash.Browser.setInterval((function() {
         return _this.closeModal();
       }), this.checkForTokenInterval);
+
+      return this.intervalId;
     };
 
     AutoRefresh.prototype.createModal = function(url) {
@@ -59,7 +63,7 @@ namespace('Dash.OAuth');
     };
 
     AutoRefresh.prototype.closeModal = function() {
-      if (Dash.OAuth.TokenAccessor.get(this.appId) != undefined) {
+      if (Dash.OAuth.TokenAccessor.get(this.appId) !== undefined) {
         this.cleanUp();
         return this.register();
       }
@@ -70,11 +74,11 @@ namespace('Dash.OAuth');
       clearTimeout(this.timeoutId);
       clearTimeout(this.refreshPageTimeoutId);
       clearInterval(this.intervalId);
-      return (_ref = this.modal) != null ? _ref.remove() : void 0;
+      return (_ref = this.modal) !== undefined ? _ref.remove() : void 0;
     };
 
     AutoRefresh.prototype.shouldShowModal = function() {
-      if (this.shouldShowCallback != undefined) {
+      if (this.shouldShowCallback !== undefined) {
         return this.shouldShowCallback();
       } else {
         return true;
@@ -86,7 +90,7 @@ namespace('Dash.OAuth');
     };
 
     AutoRefresh.isFlagSet = function() {
-      return (Dash.OAuth.Cookie.get('isAutoRefresh') != undefined);
+      return (Dash.OAuth.Cookie.get('isAutoRefresh') !== undefined);
     };
 
     return AutoRefresh;

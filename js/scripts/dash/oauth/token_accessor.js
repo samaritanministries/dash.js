@@ -7,7 +7,7 @@ namespace('Dash.OAuth');
     set: function(appId, token, expiresInSeconds) {
       expiresInSeconds = parseInt(expiresInSeconds);
       Cookie.set(this.key(appId), token, {expires: expiresInSeconds});
-      if (expiresInSeconds != null) {
+      if (expiresInSeconds !== null) {
         Cookie.set(this.expiresInKey(appId), this._futureUnixTime(expiresInSeconds), {expires: expiresInSeconds});
       } else {
         this.expireExpiresIn(appId);

@@ -3,6 +3,29 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.initConfig({
+    clean: {
+      all: '.tmp'
+    },
+
+    copy: {
+      scripts: {
+        src: [
+          'js/scripts/namespace.js',
+          'js/scripts/bower_components/jquery/jquery.js',
+          'js/scripts/bower_components/uuid-js/lib/uuid.js',
+          'js/scripts/bower_components/cookies-js/src/cookies.js',
+          'js/scripts/dash/browser.js',
+          'js/scripts/dash/redirector.js',
+          'js/scripts/dash/oauth/*.js'
+        ],
+        dest: '.tmp/'
+      }
+    },
+
+    jshint: {
+      all: ['js/scripts/dash/**/*.js', 'js/spec/dash/**/*.js']
+    },
+
     uglify: {
       options: {
         mangle: true
@@ -27,27 +50,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
-
-  copy: {
-    scripts: {
-      src: [
-        'js/scripts/namespace.js',
-        'js/scripts/bower_components/jquery/jquery.js',
-        'js/scripts/bower_components/uuid-js/lib/uuid.js',
-        'js/scripts/bower_components/cookies-js/src/cookies.js',
-        'js/scripts/dash/browser.js',
-        'js/scripts/dash/redirector.js',
-        'js/scripts/dash/oauth/*.js'
-      ],
-      dest: '.tmp/'
     }
-  },
-
-  clean: {
-    all: '.tmp'
-  }
-
   });
 
   grunt.registerTask('build:js', [

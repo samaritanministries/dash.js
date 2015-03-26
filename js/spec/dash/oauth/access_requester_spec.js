@@ -1,11 +1,20 @@
 describe("Dash.OAuth.AccessRequester", function() {
   var Cookie = Dash.OAuth.Cookie;
   var Location = Dash.Browser.Location;
+
   var createAccessRequester = function(urlGenerator) {
     return new Dash.OAuth.AccessRequester(urlGenerator);
   };
+
   var createMockUrlGenerator = function() {
-    return {generate: function(){return {url: '/redirect', state: 'state'}}};
+    return {
+      generate: function() {
+        return {
+          url: '/redirect',
+          state: 'state'
+        };
+      }
+    };
   };
 
   beforeEach(function () {

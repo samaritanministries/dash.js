@@ -8,7 +8,7 @@ Dash.OAuth.AccessRequester = function(urlGenerator) {
   this.urlGenerator = urlGenerator;
 
   this.requestAccess = function() {
-    var urlAndState = this.urlGenerator.generate()
+    var urlAndState = this.urlGenerator.generate();
     this.storeState(urlAndState.state);
     this.sendRequest(urlAndState.url);
   };

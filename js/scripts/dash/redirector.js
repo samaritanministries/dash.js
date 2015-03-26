@@ -7,7 +7,7 @@ namespace('Dash');
     this.redirectUrl = redirectUrl;
 
     this.register = function() {
-      TokenAccessor.set('redirect-url', this.redirectUrl)
+      TokenAccessor.set('redirect-url', this.redirectUrl);
     };
 
     this.redirect = function() {
@@ -19,11 +19,11 @@ namespace('Dash');
     };
 
     this.savedRedirectUrl = function() {
-      return TokenAccessor.get('redirect-url')
+      return TokenAccessor.get('redirect-url');
     };
 
     this.clearUrl = function() {
-      TokenAccessor.expire('redirect-url')
+      TokenAccessor.expire('redirect-url');
     };
   };
 

@@ -62,7 +62,7 @@ namespace('Dash.Browser');
   };
 
   Dash.Browser.scrollToTop = function() {
-    window.parent.postMessage('scrollTo:0', window.location.origin)
+    window.parent.postMessage('scrollTo:0', window.location.origin);
   };
 
   Dash.Browser.scrollToBottom = function() {

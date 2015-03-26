@@ -1,7 +1,7 @@
 describe("Dash.OAuth.UrlGenerator", function() {
   var createUrlGenerator = function(options) {
     return new Dash.OAuth.UrlGenerator(options);
-  }
+  };
 
   it("has a base url", function() {
     var urlGenerator = createUrlGenerator({baseUrl: 'https://accounts.google.com/o/oauth2/auth'});

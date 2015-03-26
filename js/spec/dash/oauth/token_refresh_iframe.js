@@ -5,7 +5,7 @@ describe('Dash.OAuth.TokenRefreshIframe', function() {
 
   var cleanUpModal = function(modal) {
     modal.remove();
-  }
+  };
 
   it('opens a iframe to the given url', function() {
     var url = 'https://example.com';
@@ -13,7 +13,7 @@ describe('Dash.OAuth.TokenRefreshIframe', function() {
 
     modal.render();
 
-    expect($('iframe[data-id=refresh-modal]').attr('src')).toEqual(url)
+    expect($('iframe[data-id=refresh-modal]').attr('src')).toEqual(url);
     cleanUpModal(modal);
   });
 
@@ -21,7 +21,7 @@ describe('Dash.OAuth.TokenRefreshIframe', function() {
     var modal = createModal('https://example.com');
 
     modal.render();
-    expect(modal.$el).not.toBeVisible()
+    expect(modal.$el).not.toBeVisible();
     cleanUpModal(modal);
   });
 
@@ -29,10 +29,10 @@ describe('Dash.OAuth.TokenRefreshIframe', function() {
     var modal = createModal('https://example.com');
 
     modal.render();
-    expect(modal.$el).toBeInDOM()
+    expect(modal.$el).toBeInDOM();
 
     modal.remove();
-    expect(modal.$el).not.toBeInDOM()
+    expect(modal.$el).not.toBeInDOM();
     cleanUpModal(modal);
   });
 });

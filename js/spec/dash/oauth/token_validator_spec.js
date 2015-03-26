@@ -2,7 +2,7 @@ describe("Dash.OAuth.TokenValidator", function() {
   var Cookie = Dash.OAuth.Cookie;
   var createTokenValidator = function(state, token, expiration) {
     return new Dash.OAuth.TokenValidator(state, token, expiration);
-  }
+  };
 
   beforeEach(function() {
     Cookie.expire(Cookie.names.token);
@@ -21,7 +21,7 @@ describe("Dash.OAuth.TokenValidator", function() {
     var validator = createTokenValidator(state, token, expiration);
     var cookieSpy = spyOn(Cookie, 'set');
 
-    validator.storeToken()
+    validator.storeToken();
 
     expect(cookieSpy).toHaveBeenCalledWith(Cookie.names.token, token, {expires: expiration});
   });
@@ -31,11 +31,11 @@ describe("Dash.OAuth.TokenValidator", function() {
     var token = 'xkjbkxjcbxckb2452';
     var expiration = 3600;
     var validator = createTokenValidator(state, token, expiration);
-    validator.storeToken()
-    expect(validator.storedToken()).toEqual(token)
+    validator.storeToken();
+    expect(validator.storedToken()).toEqual(token);
 
     validator.removeToken();
-    expect(validator.storedToken()).toBeUndefined()
+    expect(validator.storedToken()).toBeUndefined();
   });
 
   it("returns false when state doesn't match", function() {
