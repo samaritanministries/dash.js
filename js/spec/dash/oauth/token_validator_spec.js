@@ -1,12 +1,12 @@
 describe("Dash.OAuth.TokenValidator", function() {
-  var Cookie = Dash.OAuth.Cookie;
+  var Storage = Dash.OAuth.Storage;
   var createTokenValidator = function(state, token, expiration) {
     return new Dash.OAuth.TokenValidator(state, token, expiration);
   };
 
   beforeEach(function() {
-    Cookie.expire(Cookie.names.token);
-    Cookie.expire(Cookie.names.state);
+    Storage.expire(Storage.names.token);
+    Storage.expire(Storage.names.state);
   });
 
   it("identifies undefined state as invalid", function() {
@@ -19,11 +19,11 @@ describe("Dash.OAuth.TokenValidator", function() {
     var token = 'xkjbkxjcbxckb2452';
     var expiration = 3600;
     var validator = createTokenValidator(state, token, expiration);
-    var cookieSpy = spyOn(Cookie, 'set');
+    var cookieSpy = spyOn(Storage, 'set');
 
     validator.storeToken();
 
-    expect(cookieSpy).toHaveBeenCalledWith(Cookie.names.token, token, {expires: expiration});
+    expect(cookieSpy).toHaveBeenCalledWith(Storage.names.token, token, {expires: expiration});
   });
 
   it("removes a token", function() {
@@ -39,7 +39,7 @@ describe("Dash.OAuth.TokenValidator", function() {
   });
 
   it("returns false when state doesn't match", function() {
-    Cookie.set(Cookie.names.state, "11235813");
+    Storage.set(Storage.names.state, "11235813");
     var validator = createTokenValidator('aabbcdedf', "");
 
     expect(validator.isValidState()).toEqual(false);

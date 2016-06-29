@@ -1,21 +1,21 @@
 namespace('Dash.OAuth');
 
-(function(Cookie) {
+(function(Storage) {
   'use strict';
 
   Dash.OAuth.TokenAccessor = {
     set: function(appId, token, expiresInSeconds) {
       expiresInSeconds = parseInt(expiresInSeconds);
-      Cookie.set(this.key(appId), token, {expires: expiresInSeconds});
+      Storage.set(this.key(appId), token, {expires: expiresInSeconds});
       if (expiresInSeconds !== null) {
-        Cookie.set(this.expiresInKey(appId), this._futureUnixTime(expiresInSeconds), {expires: expiresInSeconds});
+        Storage.set(this.expiresInKey(appId), this._futureUnixTime(expiresInSeconds), {expires: expiresInSeconds});
       } else {
         this.expireExpiresIn(appId);
       }
     },
 
     get: function(appId) {
-      return Cookie.get(this.key(appId));
+      return Storage.get(this.key(appId));
     },
 
     _futureUnixTime: function(futureOffsetInSeconds) {
@@ -24,7 +24,7 @@ namespace('Dash.OAuth');
     },
 
     getExpiresIn: function(appId) {
-      var unixTimeExpiration = parseInt(Cookie.get(this.expiresInKey(appId)));
+      var unixTimeExpiration = parseInt(Storage.get(this.expiresInKey(appId)));
       if (isNaN(unixTimeExpiration)) {
         return Infinity;
       } else {
@@ -33,12 +33,12 @@ namespace('Dash.OAuth');
     },
 
     expire: function(appId) {
-      Cookie.expire(this.key(appId));
+      Storage.expire(this.key(appId));
       this.expireExpiresIn(appId);
     },
 
     expireExpiresIn: function(appId) {
-      Cookie.expire(this.expiresInKey(appId));
+      Storage.expire(this.expiresInKey(appId));
     },
 
     prefix: "smi-access-token:",
@@ -59,5 +59,5 @@ namespace('Dash.OAuth');
       });
     }
   };
-}(Dash.OAuth.Cookie));
+}(Dash.OAuth.Storage));
 

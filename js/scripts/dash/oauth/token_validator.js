@@ -1,6 +1,6 @@
 namespace('Dash.OAuth');
 
-(function(Cookie) {
+(function(Storage) {
   'use strict';
 
   Dash.OAuth.TokenValidator = function(state, token, expiresIn) {
@@ -9,24 +9,24 @@ namespace('Dash.OAuth');
     this.token = token;
 
     this.isValidState = function(state) {
-      return Cookie.get(Cookie.names.state) === this.state;
+      return Storage.get(Storage.names.state) === this.state;
     };
 
     this.storeToken = function () {
-      return Cookie.set(Cookie.names.token, this.token, {expires: this.expiration});
+      return Storage.set(Storage.names.token, this.token, {expires: this.expiration});
     };
 
     this.removeToken = function() {
-      return Cookie.expire(Cookie.names.token);
+      return Storage.expire(Storage.names.token);
     };
 
     this.storedToken = function() {
-      return Cookie.get(Cookie.names.token);
+      return Storage.get(Storage.names.token);
     };
 
     this.hasStoredToken = function() {
-      return Cookie.get(Cookie.names.token) !== undefined;
+      return Storage.get(Storage.names.token) !== undefined;
     };
   };
 
-}(Dash.OAuth.Cookie));
+}(Dash.OAuth.Storage));

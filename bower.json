@@ -2,7 +2,8 @@
   "name": "dash.js",
   "version": "1.1.1",
   "dependencies": {
-    "cookies-js": "~0.3.1",
+    "cookies-js": "~1.2.2",
+    "store-js": "~1.3.20",
     "uuid-js": "~0.7.4"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 describe("Dash.OAuth.AccessRequester", function() {
-  var Cookie = Dash.OAuth.Cookie;
+  var Storage = Dash.OAuth.Storage;
   var Location = Dash.Browser.Location;
 
   var createAccessRequester = function(urlGenerator) {
@@ -18,17 +18,17 @@ describe("Dash.OAuth.AccessRequester", function() {
   };
 
   beforeEach(function () {
-    Cookie.expire(Cookie.names.state);
+    Storage.expire(Storage.names.state);
     spyOn(Location, 'change');
   });
 
   it("stores the generated state in a cookie for 5 minutes", function() {
-    spyOn(Cookie, 'set');
+    spyOn(Storage, 'set');
     var urlGenerator = createMockUrlGenerator();
 
     createAccessRequester(urlGenerator).requestAccess();
 
-    expect(Cookie.set).toHaveBeenCalledWith(Cookie.names.state, urlGenerator.generate().state, {expires: 300});
+    expect(Storage.set).toHaveBeenCalledWith(Storage.names.state, urlGenerator.generate().state, {expires: 300});
   });
 
   it("makes a request with a built url", function() {
@@ -37,6 +37,6 @@ describe("Dash.OAuth.AccessRequester", function() {
     createAccessRequester(urlGenerator).requestAccess();
 
     expect(Location.change).toHaveBeenCalledWith(urlGenerator.generate().url);
-    expect(Cookie.get(Cookie.names.state)).toBe(urlGenerator.generate().state);
+    expect(Storage.get(Storage.names.state)).toBe(urlGenerator.generate().state);
   });
 });

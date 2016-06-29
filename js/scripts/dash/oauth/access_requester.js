@@ -1,6 +1,6 @@
 namespace('Dash.OAuth');
 
-(function(Cookie, Browser) {
+(function(Storage, Browser) {
   'use strict';
 
 Dash.OAuth.AccessRequester = function(urlGenerator) {
@@ -14,7 +14,7 @@ Dash.OAuth.AccessRequester = function(urlGenerator) {
   };
 
   this.storeState = function (state) {
-    Cookie.set(Cookie.names.state, state, {expires: FIVE_MINUTES_IN_SECONDS});
+    Storage.set(Storage.names.state, state, {expires: FIVE_MINUTES_IN_SECONDS});
   };
 
   this.sendRequest = function(url) {
@@ -22,4 +22,4 @@ Dash.OAuth.AccessRequester = function(urlGenerator) {
   };
 };
 
-}(Dash.OAuth.Cookie, Dash.Browser));
+}(Dash.OAuth.Storage, Dash.Browser));
