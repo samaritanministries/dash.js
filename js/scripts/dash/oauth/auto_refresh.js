@@ -40,7 +40,7 @@ namespace('Dash.OAuth');
     AutoRefresh.prototype.renderModal = function() {
       var _this = this;
       Dash.OAuth.TokenAccessor.expire(this.appId);
-      Dash.OAuth.Cookie.set('isAutoRefresh', 'true', 10);
+      Dash.OAuth.Storage.set('isAutoRefresh', 'true');
       var urlAndState = this.urlGenerator.generate();
       (new Dash.OAuth.AccessRequester()).storeState(urlAndState.state);
       this.modal = this.createModal(urlAndState.url);
@@ -86,11 +86,11 @@ namespace('Dash.OAuth');
     };
 
     AutoRefresh.expireFlag = function() {
-      return Dash.OAuth.Cookie.expire('isAutoRefresh');
+      return Dash.OAuth.Storage.expire('isAutoRefresh');
     };
 
     AutoRefresh.isFlagSet = function() {
-      return (Dash.OAuth.Cookie.get('isAutoRefresh') !== undefined);
+      return (Dash.OAuth.Storage.get('isAutoRefresh') !== undefined);
     };
 
     return AutoRefresh;

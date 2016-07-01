@@ -13,7 +13,8 @@ module.exports = function (grunt) {
           'js/scripts/namespace.js',
           'js/scripts/bower_components/jquery/jquery.js',
           'js/scripts/bower_components/uuid-js/lib/uuid.js',
-          'js/scripts/bower_components/cookies-js/src/cookies.js',
+          'js/scripts/bower_components/cookies-js/dist/cookies.js',
+          'js/scripts/bower_components/store-js/store.js',
           'js/scripts/dash/browser.js',
           'js/scripts/dash/redirector.js',
           'js/scripts/dash/oauth/*.js'
@@ -34,10 +35,13 @@ module.exports = function (grunt) {
         files: {
           'dist/dash.min.js': [
             '.tmp/js/scripts/bower_components/uuid-js/lib/uuid.js',
-            '.tmp/js/scripts/bower_components/cookies-js/src/cookies.js',
+            '.tmp/js/scripts/bower_components/cookies-js/dist/cookies.js',
+            '.tmp/js/scripts/bower_components/store-js/store.js',
             '.tmp/js/scripts/namespace.js',
             '.tmp/js/scripts/dash/browser.js',
             '.tmp/js/scripts/dash/oauth/cookie.js',
+            '.tmp/js/scripts/dash/oauth/local_storage.js',
+            '.tmp/js/scripts/dash/oauth/storage.js',
             '.tmp/js/scripts/dash/oauth/params.js',
             '.tmp/js/scripts/dash/oauth/url_generator.js',
             '.tmp/js/scripts/dash/oauth/token_accessor.js',

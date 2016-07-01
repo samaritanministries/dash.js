@@ -2,7 +2,7 @@ describe('Dash.OAuth.TokenAccessor', function() {
   var token = '34rdfcfgtbrn89',
       appId = 'testAppId',
       TokenAccessor = Dash.OAuth.TokenAccessor,
-      Cookie = Dash.OAuth.Cookie;
+      Storage = Dash.OAuth.Storage;
 
   it('saves a token with an appId', function() {
     TokenAccessor.set(appId, token);
@@ -31,7 +31,7 @@ describe('Dash.OAuth.TokenAccessor', function() {
     var expirationInSeconds = 10;
     var nowTime = Date.now();
     spyOn(Date, 'now').andReturn(nowTime);
-    var cookieSpy = spyOn(Cookie, 'set');
+    var cookieSpy = spyOn(Storage, 'set');
 
     TokenAccessor.set(appId, token, expirationInSeconds);
 

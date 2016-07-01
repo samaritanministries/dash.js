@@ -33,7 +33,7 @@ describe("Dash.OAuth.Response", function() {
       state = 'some-uuid';
       access_token = 'some-access-token';
       locationHash = "#/profile#state=" + state + "&access_token=" + access_token + "&expires_in=2014";
-      Dash.OAuth.Cookie.set('DashOAuthState', state);
+      Dash.OAuth.Storage.set('DashOAuthState', state);
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.isValidState()).toBeTruthy();
     });
@@ -43,7 +43,7 @@ describe("Dash.OAuth.Response", function() {
       state = 'some-uuid';
       access_token = 'some-access-token';
       locationHash = "#state=" + state + "&access_token=" + access_token + "&expires_in=2014";
-      Dash.OAuth.Cookie.set('DashOAuthState', state);
+      Dash.OAuth.Storage.set('DashOAuthState', state);
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.isValidState()).toBeTruthy();
     });
