@@ -11,6 +11,7 @@
     "js/scripts/dash/browser.js",
     "js/scripts/dash/oauth/cookie.js",
     "js/scripts/dash/oauth/local_storage.js",
+    "js/scripts/dash/oauth/memory_storage.js",
     "js/scripts/dash/oauth/storage.js",
     "js/scripts/dash/oauth/params.js",
     "js/scripts/dash/oauth/token_accessor.js",

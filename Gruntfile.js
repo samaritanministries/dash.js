@@ -41,6 +41,7 @@ module.exports = function (grunt) {
             '.tmp/js/scripts/dash/browser.js',
             '.tmp/js/scripts/dash/oauth/cookie.js',
             '.tmp/js/scripts/dash/oauth/local_storage.js',
+            '.tmp/js/scripts/dash/oauth/memory_storage.js',
             '.tmp/js/scripts/dash/oauth/storage.js',
             '.tmp/js/scripts/dash/oauth/params.js',
             '.tmp/js/scripts/dash/oauth/url_generator.js',
