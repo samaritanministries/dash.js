@@ -18,10 +18,10 @@ namespace('Dash.OAuth');
 
     get: function(key) {
       var resultValue = Dash.OAuth.MemoryStorage.get(key);
-      if (resultValue == undefined) {
+      if (resultValue === undefined) {
         return Dash.OAuth.LocalStorage.get(key);
       }
-      if (resultValue == undefined) {
+      if (resultValue === undefined) {
          resultValue = Dash.OAuth.Cookie.get(key);
       }
       return resultValue;
