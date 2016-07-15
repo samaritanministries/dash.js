@@ -11,27 +11,26 @@ namespace('Dash.OAuth');
     },
 
     set: function(key, value, options) {
-      if (Dash.OAuth.Cookie.isEnabled()) {
-        Dash.OAuth.Cookie.set(key, value, options);
-      } else {
-        Dash.OAuth.LocalStorage.set(key, value, options);
-      }
+      Dash.OAuth.MemoryStorage.set(key, value, options);
+      Dash.OAuth.Cookie.set(key, value, options);
+      Dash.OAuth.LocalStorage.set(key, value, options);
     },
 
     get: function(key) {
-      if (Dash.OAuth.Cookie.isEnabled()) {
-        return Dash.OAuth.Cookie.get(key);
-      } else {
+      var resultValue = Dash.OAuth.MemoryStorage.get(key);
+      if (resultValue === undefined) {
         return Dash.OAuth.LocalStorage.get(key);
       }
+      if (resultValue === undefined) {
+         resultValue = Dash.OAuth.Cookie.get(key);
+      }
+      return resultValue;
     },
 
     expire: function(key) {
-      if (Dash.OAuth.Cookie.isEnabled()) {
-        Dash.OAuth.Cookie.expire(key);
-      } else {
-        Dash.OAuth.LocalStorage.expire(key);
-      }
+      Dash.OAuth.MemoryStorage.expire(key);
+      Dash.OAuth.Cookie.expire(key);
+      Dash.OAuth.LocalStorage.expire(key);
     }
   };
 }());
