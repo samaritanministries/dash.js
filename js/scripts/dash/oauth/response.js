@@ -8,11 +8,16 @@ namespace('Dash.OAuth');
       var parts;
       parts = locationHash.split('#');
       if (parts.length === 2) {
-        return "?" + parts[1];
+        return "?" + this.removeLeadingSlash(parts[1]);
       } else if (parts.length === 3) {
-        return "?" + parts[2];
+        return "?" + this.removeLeadingSlash(parts[2]);
       }
     };
+    
+    this.removeLeadingSlash = function(queryParams) {
+        if (queryParams.startsWith("/")) return  queryParams.substr(1,queryParams.length);
+        return queryParams;
+    }
 
     this.params = new Dash.OAuth.Params(this.normalizedLocationHash(locationHash));
 

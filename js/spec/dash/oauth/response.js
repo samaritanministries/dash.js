@@ -14,6 +14,13 @@ describe("Dash.OAuth.Response", function() {
       return expect(response.context()).toEqual("123332");
     });
 
+    it('has the context parsed from the hash if extra slash', function() {
+      var locationHash, response;
+      locationHash = "#/profile/#/context=123332";
+      response = new Dash.OAuth.Response(locationHash);
+      return expect(response.context()).toEqual("123332");
+    });
+
     it('has the context parsed from the hash', function() {
       var locationHash, response;
       locationHash = "#/profile#expires_in=3600";
