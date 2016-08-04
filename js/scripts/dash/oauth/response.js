@@ -15,7 +15,7 @@ namespace('Dash.OAuth');
     };
     
     this.removeLeadingSlash = function(queryParams) {
-        if (queryParams.startsWith("/")) return  queryParams.substr(1,queryParams.length);
+        if (/^\//.test(queryParams)) return  queryParams.substr(1,queryParams.length);
         return queryParams;
     }
 
