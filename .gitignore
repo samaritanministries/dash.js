@@ -5,3 +5,4 @@ js/scripts/bower_components
 .jshintrc
 .gitattributes
 .tmp
+npm-debug.log
