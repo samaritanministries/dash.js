@@ -1,26 +1,40 @@
 {
   "name": "dash.js",
-  "version": "1.0.6",
+  "version": "1.2.3",
+  "description": "Use Samaritan OAuth abilities to build front-end applications",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": ""
+  },
   "repository": {
     "type": "git",
-    "url": "git://git@github.com:samaritanministries/dash.js.git"
+    "url": "git+https://github.com/samaritanministries/dash.js.git"
   },
-  "dependencies": {},
+  "keywords": [
+    "samaritan",
+    "dash"
+  ],
+  "author": "SMI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samaritanministries/dash.js/issues"
+  },
+  "homepage": "https://github.com/samaritanministries/dash.js#readme",
   "devDependencies": {
-    "grunt":                "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-copy":   "~0.5.0",
-    "grunt-contrib-clean":  "~0.5.0",
-    "grunt-contrib-jshint": "~0.11.1",
-    "grunt-sass" :          "~1.0.0",
-    "load-grunt-tasks":     "~0.1.0",
-    "phantomjs":            "~1.9.16",
-    "testem":               "~0.7.6"
+    "deflate-js": "^0.2.3",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "gzip-js": "^0.3.2",
+    "jasmine-jquery": "^2.1.1",
+    "jquery": "^3.1.0",
+    "load-grunt-tasks": "^3.5.2"
   },
-  "scripts": {
-    "test": "testem ci && grunt jshint"
-  },
-  "engines": {
-    "node": ">=0.8.0"
+  "dependencies": {
+    "cookies-js": "^1.2.2",
+    "store": "^1.3.20",
+    "uuid-js": "^0.7.5"
   }
 }
