@@ -9,21 +9,21 @@ describe("Dash.OAuth.Response", function() {
 
     it('has the context parsed from the hash', function() {
       var locationHash, response;
-      locationHash = "#/profile#context=123332";
+      locationHash = "#/profile#access_token=my_token&context=123332";
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.context()).toEqual("123332");
     });
 
     it('has the context parsed from the hash if extra slash', function() {
       var locationHash, response;
-      locationHash = "#/profile/#/context=123332";
+      locationHash = "#/profile/#/access_token=my_token&context=123332";
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.context()).toEqual("123332");
     });
 
     it('has the context parsed from the hash', function() {
       var locationHash, response;
-      locationHash = "#/profile#expires_in=3600";
+      locationHash = "#/profile#access_token=my_token&expires_in=3600";
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.expiresIn()).toEqual("3600");
     });
@@ -39,7 +39,7 @@ describe("Dash.OAuth.Response", function() {
       var access_token, locationHash, response, state;
       state = 'some-uuid';
       access_token = 'some-access-token';
-      locationHash = "#/profile#state=" + state + "&access_token=" + access_token + "&expires_in=2014";
+      locationHash = "#/profile#access_token=" + access_token + "&state=" + state + "&expires_in=2014";
       Dash.OAuth.Storage.set('DashOAuthState', state);
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.isValidState()).toBeTruthy();
@@ -49,7 +49,7 @@ describe("Dash.OAuth.Response", function() {
       var access_token, locationHash, response, state;
       state = 'some-uuid';
       access_token = 'some-access-token';
-      locationHash = "#state=" + state + "&access_token=" + access_token + "&expires_in=2014";
+      locationHash = "#access_token=" + access_token + "&state=" + state + "&expires_in=2014";
       Dash.OAuth.Storage.set('DashOAuthState', state);
       response = new Dash.OAuth.Response(locationHash);
       return expect(response.isValidState()).toBeTruthy();

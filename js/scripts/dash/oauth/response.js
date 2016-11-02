@@ -6,12 +6,11 @@ namespace('Dash.OAuth');
   Dash.OAuth.Response = function(locationHash) {
     this.normalizedLocationHash = function(locationHash) {
       var parts;
-      parts = locationHash.split('#');
+      parts = locationHash.split('access_token=');
       if (parts.length === 2) {
-        return "?" + this.removeLeadingSlash(parts[1]);
-      } else if (parts.length === 3) {
-        return "?" + this.removeLeadingSlash(parts[2]);
+        return "?access_token=" + parts[1];
       }
+      return locationHash;
     };
     
     this.removeLeadingSlash = function(queryParams) {
