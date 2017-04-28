@@ -12,11 +12,11 @@ namespace('Dash.OAuth');
       }
       return locationHash;
     };
-    
+
     this.removeLeadingSlash = function(queryParams) {
         if (/^\//.test(queryParams)) return  queryParams.substr(1,queryParams.length);
         return queryParams;
-    }
+    };
 
     this.params = new Dash.OAuth.Params(this.normalizedLocationHash(locationHash));
 
